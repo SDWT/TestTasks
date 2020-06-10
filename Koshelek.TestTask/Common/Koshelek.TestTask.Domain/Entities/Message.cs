@@ -3,7 +3,7 @@ using System;
 
 namespace Koshelek.TestTask.Domain.Entities
 {
-    public class Messages : BaseEntity
+    public class Message : BaseEntity
     {
         public string Text { get; set; }
 

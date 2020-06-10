@@ -10,6 +10,10 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{9C034B04-E55F-49A3-8892-AE2365D1E35D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Koshelek.TestTask.API", "Services\Koshelek.TestTask.API\Koshelek.TestTask.API.csproj", "{4761F156-DC10-459B-A4AD-7991982071B2}"
+	ProjectSection(ProjectDependencies) = postProject
+		{FA6B8C18-4A19-44FC-BFD5-53F2717240B9} = {FA6B8C18-4A19-44FC-BFD5-53F2717240B9}
+		{009362AD-7E25-4B00-96C5-243EB4A26058} = {009362AD-7E25-4B00-96C5-243EB4A26058}
+	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Koshelek.TestTask.Client", "Clients\Koshelek.TestTask.Client\Koshelek.TestTask.Client.csproj", "{B780B9F5-C058-4A02-9259-7C3CCF9E87F4}"
 EndProject
