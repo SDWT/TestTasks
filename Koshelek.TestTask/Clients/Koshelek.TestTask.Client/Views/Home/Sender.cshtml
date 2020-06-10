@@ -30,12 +30,16 @@
 
     let messageId = 0;
 
-    hubConnection.on("Send", function (message, msgId) {
+    hubConnection.on("Send", function (message, msgId, msgDateTime) {
 
         let msgIdElem = document.createElement("b");
         msgIdElem.appendChild(document.createTextNode(msgId + ': '));
 
+        let msgDateTimeElem = document.createElement("i");
+        msgDateTimeElem.appendChild(document.createTextNode(msgDateTime + " | "));
+
         let elem = document.createElement("p");
+        elem.appendChild(msgDateTimeElem);
         elem.appendChild(msgIdElem);
         elem.appendChild(document.createTextNode(message));
 
