@@ -7,7 +7,9 @@ namespace Koshelek.TestTask.Client.Hubs
     {
         public async Task Send(string message, int id)
         {
-            await this.Clients.All.SendAsync("Send", message, id);
+            
+            await this.Clients.All.SendAsync("Send", message, $"{id}");
+
         }
     }
 }

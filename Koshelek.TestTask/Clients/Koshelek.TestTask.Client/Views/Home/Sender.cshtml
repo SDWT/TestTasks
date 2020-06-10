@@ -30,12 +30,16 @@
 
     let messageId = 0;
 
-    hubConnection.on("Send", function (data) {
+    hubConnection.on("Send", function (message, msgId) {
+
+        let msgIdElem = document.createElement("b");
+        msgIdElem.appendChild(document.createTextNode(msgId + ': '));
 
         let elem = document.createElement("p");
-        elem.appendChild(document.createTextNode(data));
-        let firstElem = document.getElementById("chatroom").firstChild;
-        document.getElementById("chatroom").appendChild(elem, firstElem);
+        elem.appendChild(msgIdElem);
+        elem.appendChild(document.createTextNode(message));
+
+        document.getElementById("chatroom").appendChild(elem);
 
     });
 
