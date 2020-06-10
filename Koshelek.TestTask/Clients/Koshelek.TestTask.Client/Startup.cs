@@ -31,6 +31,7 @@ namespace Koshelek.TestTask.Client
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                app.UseBrowserLink();
             }
             else
             {
