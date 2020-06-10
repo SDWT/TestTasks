@@ -11,11 +11,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{9C034B
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Koshelek.TestTask.API", "Services\Koshelek.TestTask.API\Koshelek.TestTask.API.csproj", "{4761F156-DC10-459B-A4AD-7991982071B2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Koshelek.TestTask.Interfaces", "Koshelek.TestTask.Interfaces\Koshelek.TestTask.Interfaces.csproj", "{8FDCAEC6-F2DE-4B62-83F0-540CA74810C0}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Koshelek.TestTask.Domain", "Koshelek.TestTask.Domain\Koshelek.TestTask.Domain.csproj", "{20229F34-7C05-4A22-BC3B-946052319B7F}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Koshelek.TestTask.Client", "Clients\Koshelek.TestTask.Client\Koshelek.TestTask.Client.csproj", "{B780B9F5-C058-4A02-9259-7C3CCF9E87F4}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Koshelek.TestTask.Interfaces", "Services\Koshelek.TestTask.Interfaces\Koshelek.TestTask.Interfaces.csproj", "{FA6B8C18-4A19-44FC-BFD5-53F2717240B9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Koshelek.TestTask.Domain", "Common\Koshelek.TestTask.Domain\Koshelek.TestTask.Domain.csproj", "{009362AD-7E25-4B00-96C5-243EB4A26058}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,27 +27,27 @@ Global
 		{4761F156-DC10-459B-A4AD-7991982071B2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4761F156-DC10-459B-A4AD-7991982071B2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4761F156-DC10-459B-A4AD-7991982071B2}.Release|Any CPU.Build.0 = Release|Any CPU
-		{8FDCAEC6-F2DE-4B62-83F0-540CA74810C0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8FDCAEC6-F2DE-4B62-83F0-540CA74810C0}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{8FDCAEC6-F2DE-4B62-83F0-540CA74810C0}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{8FDCAEC6-F2DE-4B62-83F0-540CA74810C0}.Release|Any CPU.Build.0 = Release|Any CPU
-		{20229F34-7C05-4A22-BC3B-946052319B7F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{20229F34-7C05-4A22-BC3B-946052319B7F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{20229F34-7C05-4A22-BC3B-946052319B7F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{20229F34-7C05-4A22-BC3B-946052319B7F}.Release|Any CPU.Build.0 = Release|Any CPU
 		{B780B9F5-C058-4A02-9259-7C3CCF9E87F4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{B780B9F5-C058-4A02-9259-7C3CCF9E87F4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B780B9F5-C058-4A02-9259-7C3CCF9E87F4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B780B9F5-C058-4A02-9259-7C3CCF9E87F4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FA6B8C18-4A19-44FC-BFD5-53F2717240B9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FA6B8C18-4A19-44FC-BFD5-53F2717240B9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FA6B8C18-4A19-44FC-BFD5-53F2717240B9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FA6B8C18-4A19-44FC-BFD5-53F2717240B9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{009362AD-7E25-4B00-96C5-243EB4A26058}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{009362AD-7E25-4B00-96C5-243EB4A26058}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{009362AD-7E25-4B00-96C5-243EB4A26058}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{009362AD-7E25-4B00-96C5-243EB4A26058}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{4761F156-DC10-459B-A4AD-7991982071B2} = {BB43FF0C-2791-49F1-9A39-5D833A355D6F}
-		{8FDCAEC6-F2DE-4B62-83F0-540CA74810C0} = {BB43FF0C-2791-49F1-9A39-5D833A355D6F}
-		{20229F34-7C05-4A22-BC3B-946052319B7F} = {9C034B04-E55F-49A3-8892-AE2365D1E35D}
 		{B780B9F5-C058-4A02-9259-7C3CCF9E87F4} = {EF154EF8-8BBE-4738-A2A9-1192EC6B1DC8}
+		{FA6B8C18-4A19-44FC-BFD5-53F2717240B9} = {BB43FF0C-2791-49F1-9A39-5D833A355D6F}
+		{009362AD-7E25-4B00-96C5-243EB4A26058} = {9C034B04-E55F-49A3-8892-AE2365D1E35D}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {AD137913-5485-4D40-99B7-E21B3C67EE58}
