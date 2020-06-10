@@ -1,6 +1,25 @@
-﻿
+﻿@model Koshelek.TestTask.Domain.Entities.Message
+
 @*Messages*@
 
-<div id="Messages">
 
-</div>
+<div id="chatroom"></div>
+<script src="/js/signalr/dist/browser/signalr.min.js"></script>
+<script>
+    const hubConnection = new signalR.HubConnectionBuilder()
+        .withUrl("/messages")
+        .build();
+
+    hubConnection.on("Send", function (data, id) {
+
+        let elem = document.createElement("p");
+        elem.appendChild(document.createTextNode(data));
+        let firstElem = document.getElementById("chatroom").firstChild;
+        document.getElementById("chatroom").appendChild(elem, firstElem);
+
+    });
+
+    
+
+    hubConnection.start();
+</script>

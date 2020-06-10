@@ -8,15 +8,41 @@
         <form asp-action="Sender">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="Text" class="control-label"></label>
-                <input asp-for="Text" class="form-control" />
+                <label asp-for="Text" class="control-label" type="text"></label>
+                <input asp-for="Text" class="form-control" id="message"/>
                 <span asp-validation-for="Text" class="text-danger"></span>
             </div>
             <input type="hidden" asp-for="Id" value="null" />
             <input type="hidden" asp-for="ServerDateTime" value="null" />
             <div class="form-group">
-                <input type="submit" value="Send" class="btn btn-success" />
+                <input type="button" id="sendBtn" value="Send" class="btn btn-success" />
             </div>
         </form>
     </div>
 </div>
+<div id="chatroom"></div>
+<script src="/js/signalr/dist/browser/signalr.min.js"></script>
+<script>
+
+    const hubConnection = new signalR.HubConnectionBuilder()
+        .withUrl("/messages")
+        .build();
+
+    let messageId = 0;
+
+    hubConnection.on("Send", function (data) {
+
+        let elem = document.createElement("p");
+        elem.appendChild(document.createTextNode(data));
+        let firstElem = document.getElementById("chatroom").firstChild;
+        document.getElementById("chatroom").appendChild(elem, firstElem);
+
+    });
+
+    document.getElementById("sendBtn").addEventListener("click", function (e) {
+        let message = document.getElementById("message").value;
+        hubConnection.invoke("Send", message, messageId += 1);
+    });
+
+    hubConnection.start();
+</script>
