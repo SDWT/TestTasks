@@ -1,0 +1,41 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30204.135
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Koshelek.TestTask.Client", "Koshelek.TestTask.Client\Koshelek.TestTask.Client.csproj", "{A9B91BE6-C543-404F-B7AE-CE3FC68794A6}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Clients", "Clients", "{EF154EF8-8BBE-4738-A2A9-1192EC6B1DC8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Serivices", "Serivices", "{BB43FF0C-2791-49F1-9A39-5D833A355D6F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{9C034B04-E55F-49A3-8892-AE2365D1E35D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Koshelek.TestTask.API", "Services\Koshelek.TestTask.API\Koshelek.TestTask.API.csproj", "{4761F156-DC10-459B-A4AD-7991982071B2}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A9B91BE6-C543-404F-B7AE-CE3FC68794A6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A9B91BE6-C543-404F-B7AE-CE3FC68794A6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A9B91BE6-C543-404F-B7AE-CE3FC68794A6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A9B91BE6-C543-404F-B7AE-CE3FC68794A6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4761F156-DC10-459B-A4AD-7991982071B2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4761F156-DC10-459B-A4AD-7991982071B2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4761F156-DC10-459B-A4AD-7991982071B2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4761F156-DC10-459B-A4AD-7991982071B2}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{A9B91BE6-C543-404F-B7AE-CE3FC68794A6} = {EF154EF8-8BBE-4738-A2A9-1192EC6B1DC8}
+		{4761F156-DC10-459B-A4AD-7991982071B2} = {BB43FF0C-2791-49F1-9A39-5D833A355D6F}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {AD137913-5485-4D40-99B7-E21B3C67EE58}
+	EndGlobalSection
+EndGlobal
