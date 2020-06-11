@@ -33,7 +33,8 @@ namespace Koshelek.TestTask.Client.Controllers
         {
             message.ServerDateTime = DateTime.Now;
 
-            await _HubContext.Clients.AllExcept(connectionId).SendAsync("Send", message.Text, message.Id, message.ServerDateTime.ToString("yyyy-MM-dd HH:mm:ss"));
+            await _HubContext.Clients.AllExcept(connectionId).
+                SendAsync("Send", message.Text, message.Id, message.ServerDateTime.ToString("yyyy-MM-dd HH:mm:ss"));
 
             await _HubContext.Clients.AllExcept(connectionId).SendAsync("ReceiveMessage", new
             {
@@ -57,8 +58,7 @@ namespace Koshelek.TestTask.Client.Controllers
             Start = End - TimeSpan.FromSeconds(60);
 
             var messages = GetMessagesByDate(Start, End);
-            messages.Add(new Message { Text = "WIP", Id = -1, ServerDateTime = DateTime.Now });
-            messages.Add(new Message { Text = "WIP", Id = -2, ServerDateTime = DateTime.Now });
+
             var messages2 = messages.Select(el => new
             {
                 el.Text,
@@ -74,8 +74,7 @@ namespace Koshelek.TestTask.Client.Controllers
             Start = End - TimeSpan.FromSeconds(600);
 
             var messages = GetMessagesByDate(Start, End);
-            messages.Add(new Message { Text = "WIP", Id = -3, ServerDateTime = DateTime.Now });
-            messages.Add(new Message { Text = "WIP", Id = -4, ServerDateTime = DateTime.Now });
+
             var messages2 = messages.Select(el => new
             {
                 el.Text,

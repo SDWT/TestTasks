@@ -26,9 +26,9 @@ namespace Koshelek.TestTask.API.Controllers
                 End = DateTime.Now;
             }
 
-            messages.Add(new Message { Text = "WIP", Id = -1, ServerDateTime = DateTime.Now });
-            messages.Add(new Message { Text = "WIP", Id = -2, ServerDateTime = DateTime.Now });
-            messages.Add(new Message { Text = "WIP", Id = -3, ServerDateTime = DateTime.Now });
+            //messages.Add(new Message { Text = "WIP", Id = -1, ServerDateTime = DateTime.Now });
+            //messages.Add(new Message { Text = "WIP", Id = -2, ServerDateTime = DateTime.Now });
+            //messages.Add(new Message { Text = "WIP", Id = -3, ServerDateTime = DateTime.Now });
 
             return messages;
         }
