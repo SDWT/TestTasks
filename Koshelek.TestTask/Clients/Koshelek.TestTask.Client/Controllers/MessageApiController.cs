@@ -33,14 +33,8 @@ namespace Koshelek.TestTask.Client.Controllers
         {
             return new Message { Text = "WIP", Id = -1, ServerDateTime = DateTime.Now};
         }
-        [HttpGet]
-        public void Get()
-        {
-            DateTime Start, End = DateTime.Now;
-            Start = End - TimeSpan.FromSeconds(60);
 
-            //await _HubContext.Clients.Client(connectionId).SendAsync("Receive", GetMessagesByDate(Start, End));
-        }
+
 
         [HttpPost]
         public async Task GetLast1MinMessages(string connectionId)

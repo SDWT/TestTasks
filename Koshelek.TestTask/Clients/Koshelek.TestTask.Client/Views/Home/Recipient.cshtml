@@ -3,15 +3,14 @@
 @*Messages*@
 
 
-<div id="chatroom"></div>
+<div id="Messages"></div>
 <script src="/js/signalr/dist/browser/signalr.min.js"></script>
 <script>
     const hubConnection = new signalR.HubConnectionBuilder()
         .withUrl("/messages")
         .build();
 
-    hubConnection.on("Send", function (message, msgId, msgDateTime) {
-
+    function addMessage(message, msgId, msgDateTime) {
         let msgIdElem = document.createElement("b");
         msgIdElem.appendChild(document.createTextNode(msgId + ': '));
 
@@ -23,7 +22,11 @@
         elem.appendChild(msgIdElem);
         elem.appendChild(document.createTextNode(message));
 
-        document.getElementById("chatroom").appendChild(elem);
+        document.getElementById("Messages").appendChild(elem);
+    }
+
+    hubConnection.on("Send", function (message, msgId, msgDateTime) {
+        addMessage(message, msgId, msgDateTime);
 
     });
 
