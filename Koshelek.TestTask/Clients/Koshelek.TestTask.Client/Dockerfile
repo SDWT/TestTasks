@@ -6,10 +6,10 @@ EXPOSE 80
 
 FROM mcr.microsoft.com/dotnet/core/sdk:3.1-buster AS build
 WORKDIR /src
-COPY ["Koshelek.TestTask.Client/Koshelek.TestTask.Client.csproj", "Koshelek.TestTask.Client/"]
-RUN dotnet restore "Koshelek.TestTask.Client/Koshelek.TestTask.Client.csproj"
+COPY ["Clients/Koshelek.TestTask.Client/Koshelek.TestTask.Client.csproj", "Clients/Koshelek.TestTask.Client/"]
+RUN dotnet restore "Clients/Koshelek.TestTask.Client/Koshelek.TestTask.Client.csproj"
 COPY . .
-WORKDIR "/src/Koshelek.TestTask.Client"
+WORKDIR "/src/Clients/Koshelek.TestTask.Client"
 RUN dotnet build "Koshelek.TestTask.Client.csproj" -c Release -o /app/build
 
 FROM build AS publish
