@@ -5,9 +5,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Services\**" />
-    <EmbeddedResource Remove="Services\**" />
-    <None Remove="Services\**" />
+    <ProjectReference Include="..\..\Common\Koshelek.TestTask.Domain\Koshelek.TestTask.Domain.csproj" />
+    <ProjectReference Include="..\Koshelek.TestTask.DAL\Koshelek.TestTask.DAL.csproj" />
   </ItemGroup>
 
 </Project>

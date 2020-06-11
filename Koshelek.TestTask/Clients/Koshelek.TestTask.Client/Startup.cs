@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Koshelek.TestTask.Client.Hubs;
+using Koshelek.TestTask.DAL.DataBase;
+using Koshelek.TestTask.Interfaces.Interfaces;
+using Koshelek.TestTask.Interfaces.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -25,6 +28,8 @@ namespace Koshelek.TestTask.Client
         {
             services.AddControllersWithViews();
             services.AddSignalR();
+
+            services.AddSingleton<IMessageData>(new PostgreSqlMessageData("Host=localhost;Username=asp;Password=asp;Database=aspdb;Port=55432"));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

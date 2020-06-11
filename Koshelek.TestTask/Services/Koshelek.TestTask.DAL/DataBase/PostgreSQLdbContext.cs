@@ -1,58 +1,85 @@
-﻿using System;
+﻿using Koshelek.TestTask.Domain.Entities;
+using Npgsql;
+using System;
 using System.Collections.Generic;
-using System.Data;
+using System.ComponentModel.Design;
+using System.Net.Http;
 using System.Text;
 
 namespace Koshelek.TestTask.DAL.DataBase
 {
-    public class PostgreSQLdbContext : IDbConnection
+    public class PostgreSqlDbContext
     {
-        public PostgreSQLdbContext()
+        private const string _cs = "Host=localhost;Username=asp;Password=asp;Database=aspdb;Port=55432";
+        private const string _DbName = "messages";
+        
+        private const string _CreateTableString = "CREATE TABLE IF NOT EXISTS messages(message_id integer PRIMARY KEY, text VARCHAR(128) NOT NULL, datetime TIMESTAMP NOT NULL);";
+
+        private const string AddMessageString = "INSERT INTO messages VALUES(3, 'TextMessage', '2020-06-22 19:12:25')";
+        private const string RowExistString = "SELECT EXISTS(SELECT 1 FROM messages WHERE message_id=3)";
+        private const string GetMessagesByTimeStampString =
+            "SELECT message_id, text, datetime FROM messages WHERE datetime BETWEEN '2020-06-02 23:55:00'::timestamp AND '2020-06-22 19:12:25'::timestamp;";
+
+        private readonly string _ConnectionString;
+        public PostgreSqlDbContext(string ConnectionString = _cs)
+        {
+            _ConnectionString = ConnectionString;
+        }
+
+        public void AddMessage()
         {
 
         }
 
-        public string ConnectionString { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-
-        public int ConnectionTimeout => throw new NotImplementedException();
-
-        public string Database => throw new NotImplementedException();
-
-        public ConnectionState State => throw new NotImplementedException();
-
-        public IDbTransaction BeginTransaction()
+        public void UpdateMessage()
         {
-            throw new NotImplementedException();
+
         }
 
-        public IDbTransaction BeginTransaction(IsolationLevel il)
+        public List<Message> GetMessagesByTimeStamp(DateTime Start, DateTime End)
         {
-            throw new NotImplementedException();
-        }
+            var messages = new List<Message>();
+            var strB = new StringBuilder();
 
-        public void ChangeDatabase(string databaseName)
-        {
-            throw new NotImplementedException();
-        }
+            string[] attributes = { "message_id", "text", "datetime" };
 
-        public void Close()
-        {
-            throw new NotImplementedException();
-        }
+            strB.Append("SELECT message_id, text, datetime FROM messages WHERE datetime BETWEEN ");
+            strB.Append($"'{Start.ToString("yyyy-MM-dd HH:mm:ss")}'::timestamp ");
+            strB.Append("AND ");
+            strB.Append($"'{End.ToString("yyyy-MM-dd HH:mm:ss")}'::timestamp;");
 
-        public IDbCommand CreateCommand()
-        {
-            throw new NotImplementedException();
-        }
+            string GetMessagesBetweenTimeStampCommand = strB.ToString();
 
-        public void Dispose()
-        {
-            throw new NotImplementedException();
-        }
 
-        public void Open()
-        {
-            throw new NotImplementedException();
+            using (NpgsqlConnection connection = new NpgsqlConnection(_ConnectionString))
+            {
+                connection.Open();
+                using (var command = connection.CreateCommand())
+                {
+
+                    //log Console.WriteLine($"\nINFO: Start reading\n");
+
+                    command.CommandText = GetMessagesBetweenTimeStampCommand;
+                    NpgsqlDataReader reader = command.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        messages.Add(new Message
+                        {
+                            Id = int.Parse(reader[0].ToString()),
+                            Text = reader[1].ToString(),
+                            ServerDateTime = DateTime.Parse(reader[2].ToString())
+                        });
+                        //log Console.WriteLine($"");
+                    }
+                    reader.Close();
+                    //log Console.WriteLine($"\nINFO: End reading\n");
+                }
+
+                connection.Close();
+            }
+
+
+            return messages;
         }
     }
 }
