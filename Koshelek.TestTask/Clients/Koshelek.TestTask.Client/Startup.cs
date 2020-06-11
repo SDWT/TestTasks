@@ -45,14 +45,17 @@ namespace Koshelek.TestTask.Client
 
             app.UseRouting();
 
-            //app.UseAuthorization();
+            app.UseCors();
+
+            app.UseAuthentication();
+            app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
+                endpoints.MapHub<MessagesHub>("/messages");
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
-                endpoints.MapHub<MessagesHub>("/messages");
             });
         }
     }
