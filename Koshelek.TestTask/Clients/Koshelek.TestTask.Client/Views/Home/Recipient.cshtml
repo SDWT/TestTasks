@@ -24,10 +24,7 @@
 
         document.getElementById("Messages").appendChild(elem);
     }
-    hubConnection.on("Send", function (message, msgId, msgDateTime) {
-        addMessage(message, msgId, msgDateTime);
 
-    });
     hubConnection.on("ReceiveMessage", function (message) {
         addMessage(message.text, message.order, message.serverDateTime);
 

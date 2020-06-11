@@ -33,18 +33,7 @@ namespace Koshelek.TestTask.Client.Controllers
         {
             message.ServerDateTime = DateTime.Now;
 
-            await _HubContext.Clients.AllExcept(connectionId).
-                SendAsync("Send", message.Text, message.Id, message.ServerDateTime.ToString("yyyy-MM-dd HH:mm:ss"));
-
             await _HubContext.Clients.AllExcept(connectionId).SendAsync("ReceiveMessage", new
-            {
-                message.Text,
-                message.Id,
-                message.Order,
-                ServerDateTime = message.ServerDateTime.ToString("yyyy-MM-dd HH:mm:ss")
-            });
-
-            await _HubContext.Clients.All.SendAsync("ReceiveMessage", new
             {
                 message.Text,
                 message.Id,
@@ -98,21 +87,6 @@ namespace Koshelek.TestTask.Client.Controllers
         public List<Message> GetMessagesByDate(DateTime Start, DateTime End = default(DateTime))
         {
             return _MessageData.GetMessagesByDate(Start, End);
-        }
-
-        public Task PostMessageAsync(Message message)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<List<Message>> GetMessagesByDateAsync(DateTime Start, DateTime End)
-        {
-            throw new NotImplementedException();
-        }
-
-        void IMessageData.PostMessage(Message message)
-        {
-            throw new NotImplementedException();
         }
     }
 }

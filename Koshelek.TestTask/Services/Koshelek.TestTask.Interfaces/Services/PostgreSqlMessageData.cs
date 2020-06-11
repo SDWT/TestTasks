@@ -22,19 +22,9 @@ namespace Koshelek.TestTask.Interfaces.Services
             return _db.GetMessagesByTimeStamp(Start, End);
         }
 
-        public Task<List<Message>> GetMessagesByDateAsync(DateTime Start, DateTime End)
-        {
-            throw new NotImplementedException();
-        }
-
         public void PostMessage(Message message)
         {
             _db.UpdateMessage(message);
-        }
-
-        public Task PostMessageAsync(Message message)
-        {
-            throw new NotImplementedException();
         }
     }
 }

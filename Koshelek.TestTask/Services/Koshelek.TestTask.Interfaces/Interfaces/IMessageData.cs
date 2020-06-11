@@ -10,10 +10,6 @@ namespace Koshelek.TestTask.Interfaces.Interfaces
     {
         public void PostMessage(Message message);
 
-        public Task PostMessageAsync(Message message);
-
         public List<Message> GetMessagesByDate(DateTime Start, DateTime End);
-
-        public Task<List<Message>> GetMessagesByDateAsync(DateTime Start, DateTime End);
     }
 }
