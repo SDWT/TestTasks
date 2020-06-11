@@ -28,6 +28,7 @@
         .withUrl("/messages")
         .build();
 
+    let connectionId = "";
     let messageId = 0;
 
     function addMessage(message, msgId, msgDateTime) {
@@ -50,10 +51,38 @@
 
     });
 
-    document.getElementById("sendBtn").addEventListener("click", function (e) {
-        let message = document.getElementById("message").value;
-        hubConnection.invoke("Send", message, messageId += 1);
+    hubConnection.on("ReceiveMessage", function (message) {
+        addMessage(message.text, message.id, message.serverDateTime);
+
     });
 
-    hubConnection.start();
+    //document.getElementById("sendBtn").addEventListener("click", function (e) {
+    //    let message = document.getElementById("message").value;
+    //    hubConnection.invoke("Send", message, messageId += 1);
+    //});
+
+    document.getElementById("sendBtn").addEventListener("click", function (e) {
+        e.preventDefault();
+
+        let message
+        const data = new FormData();
+        data.append("connectionId", connectionId);
+        data.append("id", messageId += 1);
+        data.append("text", document.getElementById("message").value);
+        data.append("serverDateTime", 0);
+        //data.append("order", messageId += 1);
+
+        //console.log("Start oneMinBtn");
+
+        fetch("/MessageApi/Post", {
+            method: "POST",
+            body: data
+        })
+            .catch(error => console.error("Error: ", error));
+    });
+
+    hubConnection.start().then(() => {
+        console.log(hubConnection.connectionId);
+        connectionId = hubConnection.connectionId;
+    });
 </script>

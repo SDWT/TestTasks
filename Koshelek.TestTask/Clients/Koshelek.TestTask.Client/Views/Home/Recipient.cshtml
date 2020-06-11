@@ -30,6 +30,10 @@
 
     });
 
+    hubConnection.on("ReceiveMessage", function (message) {
+        addMessage(message.text, message.id, message.serverDateTime);
+
+    });
     
 
     hubConnection.start();

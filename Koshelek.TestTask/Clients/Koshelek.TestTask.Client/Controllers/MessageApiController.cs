@@ -29,12 +29,26 @@ namespace Koshelek.TestTask.Client.Controllers
         }
 
         [HttpPost, ActionName("Post")]
-        public Message PostMessage(Message message)
+        public async Task Post(string connectionId, Message message)
         {
-            return new Message { Text = "WIP", Id = -1, ServerDateTime = DateTime.Now};
+            message.ServerDateTime = DateTime.Now;
+
+            await _HubContext.Clients.AllExcept(connectionId).SendAsync("Send", message.Text, message.Id, message.ServerDateTime.ToString("yyyy-MM-dd HH:mm:ss"));
+
+            await _HubContext.Clients.AllExcept(connectionId).SendAsync("ReceiveMessage", new
+            {
+                message.Text,
+                message.Id,
+                ServerDateTime = message.ServerDateTime.ToString("yyyy-MM-dd HH:mm:ss")
+            });
+
+            _MessageData.PostMessage(message);
         }
 
-
+        public void PostMessage(Message message)
+        {
+            _MessageData.PostMessage(message);
+        }
 
         [HttpPost]
         public async Task GetLast1MinMessages(string connectionId)
@@ -73,16 +87,6 @@ namespace Koshelek.TestTask.Client.Controllers
 
         public List<Message> GetMessagesByDate(DateTime Start, DateTime End = default(DateTime))
         {
-            //var messages = new List<Message>();
-            //if (End == default(DateTime))
-            //{
-            //    End = DateTime.Now;
-            //}
-
-            //messages.Add(new Message { Text = "WIP", Id = -1, ServerDateTime = DateTime.Now });
-            //messages.Add(new Message { Text = "WIP", Id = -2, ServerDateTime = DateTime.Now });
-            //messages.Add(new Message { Text = "WIP", Id = -3, ServerDateTime = DateTime.Now });
-
             return _MessageData.GetMessagesByDate(Start, End);
         }
 

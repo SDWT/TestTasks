@@ -21,21 +21,81 @@ namespace Koshelek.TestTask.DAL.DataBase
             "SELECT message_id, text, datetime FROM messages WHERE datetime BETWEEN '2020-06-02 23:55:00'::timestamp AND '2020-06-22 19:12:25'::timestamp;";
 
         private readonly string _ConnectionString;
+
+        /// <summary>
+        /// Working with PostgreSQL constructor
+        /// </summary>
+        /// <param name="ConnectionString">Database connection string</param>
         public PostgreSqlDbContext(string ConnectionString = _cs)
         {
             _ConnectionString = ConnectionString;
+
+            #region Create Table If not exists
+            using (NpgsqlConnection connection = new NpgsqlConnection(_ConnectionString))
+            {
+                connection.Open();
+                using (var command = connection.CreateCommand())
+                {
+                    command.CommandText = _CreateTableString;
+                    command.ExecuteScalar();
+                    //Console.WriteLine($"PostgreSQL answer: {tmp}");
+                }
+            }
+            #endregion
         }
 
-        public void AddMessage()
+        public void AddMessage(Message message)
         {
+            string InsertMessage = 
+                $"INSERT INTO messages VALUES({message.Id}, '{message.Text}', '{message.ServerDateTime.ToString("yyyy-MM-dd HH:mm:ss")}')";
 
+            using (NpgsqlConnection connection = new NpgsqlConnection(_ConnectionString))
+            {
+                connection.Open();
+                using (var command = connection.CreateCommand())
+                {
+
+                    //log Console.WriteLine($"\nINFO: Start reading\n");
+
+                    command.CommandText = InsertMessage;
+                    
+                }
+
+                connection.Close();
+            }
         }
 
-        public void UpdateMessage()
+        public void UpdateMessage(Message message)
         {
+            string RowExist = $"SELECT EXISTS(SELECT 1 FROM messages WHERE message_id={message.Id})";
+            string InsertMessage =
+                $"INSERT INTO messages VALUES({message.Id}, '{message.Text}', '{message.ServerDateTime.ToString("yyyy-MM-dd HH:mm:ss")}')";
 
+            using (NpgsqlConnection connection = new NpgsqlConnection(_ConnectionString))
+            {
+                connection.Open();
+                using (var command = connection.CreateCommand())
+                {
+                    command.CommandText = RowExist;
+                    var tmp = bool.Parse(command.ExecuteScalar()?.ToString());
+                    if (!tmp)
+                    {
+                        using (var addCommand = connection.CreateCommand())
+                        {
+                            addCommand.CommandText = InsertMessage;
+                            addCommand.ExecuteScalar();
+                        }
+                    }
+                }
+            }
         }
 
+        /// <summary>
+        /// Get messages if time period
+        /// </summary>
+        /// <param name="Start">Begin Start period</param>
+        /// <param name="End">End Start Period</param>
+        /// <returns></returns>
         public List<Message> GetMessagesByTimeStamp(DateTime Start, DateTime End)
         {
             var messages = new List<Message>();

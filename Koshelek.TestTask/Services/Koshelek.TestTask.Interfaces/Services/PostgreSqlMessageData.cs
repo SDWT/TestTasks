@@ -29,7 +29,7 @@ namespace Koshelek.TestTask.Interfaces.Services
 
         public void PostMessage(Message message)
         {
-            throw new NotImplementedException();
+            _db.UpdateMessage(message);
         }
 
         public Task PostMessageAsync(Message message)
