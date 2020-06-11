@@ -29,7 +29,7 @@ namespace Koshelek.TestTask.Client.Controllers
         }
 
         [HttpPost, ActionName("Post")]
-        public Message PostMessage(int Id, string Text)
+        public Message PostMessage(Message message)
         {
             return new Message { Text = "WIP", Id = -1, ServerDateTime = DateTime.Now};
         }
@@ -51,8 +51,7 @@ namespace Koshelek.TestTask.Client.Controllers
                 el.Id,
                 ServerDateTime = el.ServerDateTime.ToString("yyyy-MM-dd HH:mm:ss")
             }).ToArray();
-            //await _HubContext.Clients.Client(connectionId).SendAsync("Receive", messages);
-            await _HubContext.Clients.All.SendAsync("Receive", messages2);
+            await _HubContext.Clients.Client(connectionId).SendAsync("Receive", messages2);
         }
 
         public async Task GetLast10MinMessages(string connectionId)
@@ -69,8 +68,7 @@ namespace Koshelek.TestTask.Client.Controllers
                 el.Id,
                 ServerDateTime = el.ServerDateTime.ToString("yyyy-MM-dd HH:mm:ss")
             }).ToArray();
-            //await _HubContext.Clients.Client(connectionId).SendAsync("Receive", messages);
-            await _HubContext.Clients.All.SendAsync("Receive", messages2);
+            await _HubContext.Clients.Client(connectionId).SendAsync("Receive", messages2);
         }
 
         public List<Message> GetMessagesByDate(DateTime Start, DateTime End = default(DateTime))
@@ -88,17 +86,17 @@ namespace Koshelek.TestTask.Client.Controllers
             return _MessageData.GetMessagesByDate(Start, End);
         }
 
-        public void PostMessage(Message message)
-        {
-            throw new NotImplementedException();
-        }
-
         public Task PostMessageAsync(Message message)
         {
             throw new NotImplementedException();
         }
 
         public Task<List<Message>> GetMessagesByDateAsync(DateTime Start, DateTime End)
+        {
+            throw new NotImplementedException();
+        }
+
+        void IMessageData.PostMessage(Message message)
         {
             throw new NotImplementedException();
         }

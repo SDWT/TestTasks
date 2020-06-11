@@ -24,11 +24,11 @@
             //data.append("start", document.getElementById("productField").value);
             data.append("connectionId", connectionId);
 
-            console.log("Start oneMinBtn");
+            //console.log("Start oneMinBtn");
 
             fetch("/MessageApi/GetLast1MinMessages", {
                 method: "POST",
-                body: connectionId
+                body: data
             })
                 .catch(error => console.error("Error: ", error));
         });
@@ -41,11 +41,11 @@
             //data.append("start", document.getElementById("productField").value);
             data.append("connectionId", connectionId);
 
-            console.log("Start oneMinBtn");
+            //console.log("Start oneMinBtn");
 
             fetch("/MessageApi/GetLast10MinMessages", {
                 method: "POST",
-                body: connectionId
+                body: data
             })
                 .catch(error => console.error("Error: ", error));
         });
