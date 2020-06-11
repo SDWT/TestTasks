@@ -29,7 +29,7 @@ namespace Koshelek.TestTask.Client
             services.AddControllersWithViews();
             services.AddSignalR();
 
-            services.AddSingleton<IMessageData>(new PostgreSqlMessageData("Host=localhost;Username=asp;Password=asp;Database=aspdb;Port=55432"));
+            services.AddSingleton<IMessageData>(new PostgreSqlMessageData(Configuration.GetConnectionString("DefaultConnection")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
