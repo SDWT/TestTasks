@@ -53,8 +53,26 @@ namespace Koshelek.TestTask.Client.Controllers
             messages.Add(new Message { Text = "WIP", Id = -2, ServerDateTime = DateTime.Now });
             var messages2 = messages.Select(el => new
             {
-                Text = el.Text,
-                Id = el.Id,
+                el.Text,
+                el.Id,
+                ServerDateTime = el.ServerDateTime.ToString("yyyy-MM-dd HH:mm:ss")
+            }).ToArray();
+            //await _HubContext.Clients.Client(connectionId).SendAsync("Receive", messages);
+            await _HubContext.Clients.All.SendAsync("Receive", messages2);
+        }
+
+        public async Task GetLast10MinMessages(string connectionId)
+        {
+            DateTime Start, End = DateTime.Now;
+            Start = End - TimeSpan.FromSeconds(600);
+
+            var messages = GetMessagesByDate(Start, End);
+            messages.Add(new Message { Text = "WIP", Id = -3, ServerDateTime = DateTime.Now });
+            messages.Add(new Message { Text = "WIP", Id = -4, ServerDateTime = DateTime.Now });
+            var messages2 = messages.Select(el => new
+            {
+                el.Text,
+                el.Id,
                 ServerDateTime = el.ServerDateTime.ToString("yyyy-MM-dd HH:mm:ss")
             }).ToArray();
             //await _HubContext.Clients.Client(connectionId).SendAsync("Receive", messages);

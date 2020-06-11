@@ -33,6 +33,23 @@
                 .catch(error => console.error("Error: ", error));
         });
 
+    document.getElementById("tenMinBtn")
+        .addEventListener("click", function (e) {
+            e.preventDefault();
+
+            const data = new FormData();
+            //data.append("start", document.getElementById("productField").value);
+            data.append("connectionId", connectionId);
+
+            console.log("Start oneMinBtn");
+
+            fetch("/MessageApi/GetLast10MinMessages", {
+                method: "POST",
+                body: connectionId
+            })
+                .catch(error => console.error("Error: ", error));
+        });
+
     function addMessage(message, msgId, msgDateTime) {
         let msgIdElem = document.createElement("b");
         msgIdElem.appendChild(document.createTextNode(msgId + ': '));
