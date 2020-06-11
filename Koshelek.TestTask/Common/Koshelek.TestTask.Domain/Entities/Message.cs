@@ -8,5 +8,7 @@ namespace Koshelek.TestTask.Domain.Entities
         public string Text { get; set; }
 
         public DateTime ServerDateTime { get; set; }
+
+        public int Order { get; set; }
     }
 }

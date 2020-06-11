@@ -40,6 +40,15 @@ namespace Koshelek.TestTask.Client.Controllers
             {
                 message.Text,
                 message.Id,
+                message.Order,
+                ServerDateTime = message.ServerDateTime.ToString("yyyy-MM-dd HH:mm:ss")
+            });
+
+            await _HubContext.Clients.All.SendAsync("ReceiveMessage", new
+            {
+                message.Text,
+                message.Id,
+                message.Order,
                 ServerDateTime = message.ServerDateTime.ToString("yyyy-MM-dd HH:mm:ss")
             });
 
@@ -63,6 +72,7 @@ namespace Koshelek.TestTask.Client.Controllers
             {
                 el.Text,
                 el.Id,
+                el.Order,
                 ServerDateTime = el.ServerDateTime.ToString("yyyy-MM-dd HH:mm:ss")
             }).ToArray();
             await _HubContext.Clients.Client(connectionId).SendAsync("Receive", messages2);
@@ -79,6 +89,7 @@ namespace Koshelek.TestTask.Client.Controllers
             {
                 el.Text,
                 el.Id,
+                el.Order,
                 ServerDateTime = el.ServerDateTime.ToString("yyyy-MM-dd HH:mm:ss")
             }).ToArray();
             await _HubContext.Clients.Client(connectionId).SendAsync("Receive", messages2);

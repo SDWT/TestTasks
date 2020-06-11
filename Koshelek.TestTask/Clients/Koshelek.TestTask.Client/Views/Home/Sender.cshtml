@@ -29,48 +29,45 @@
         .build();
 
     let connectionId = "";
-    let messageId = 0;
+    let messageOrder = 0;
 
-    function addMessage(message, msgId, msgDateTime) {
-        let msgIdElem = document.createElement("b");
-        msgIdElem.appendChild(document.createTextNode(msgId + ': '));
+    function addMessage(message, msgOrder, msgDateTime) {
+        let msgOrderElem = document.createElement("b");
+        msgOrderElem.appendChild(document.createTextNode(msgOrder + ': '));
 
         let msgDateTimeElem = document.createElement("i");
         msgDateTimeElem.appendChild(document.createTextNode(msgDateTime + " | "));
 
         let elem = document.createElement("p");
         elem.appendChild(msgDateTimeElem);
-        elem.appendChild(msgIdElem);
+        elem.appendChild(msgOrderElem);
         elem.appendChild(document.createTextNode(message));
 
         document.getElementById("Messages").appendChild(elem);
     }
-
     hubConnection.on("Send", function (message, msgId, msgDateTime) {
         addMessage(message, msgId, msgDateTime);
 
     });
-
     hubConnection.on("ReceiveMessage", function (message) {
-        addMessage(message.text, message.id, message.serverDateTime);
+        addMessage(message.text, message.order, message.serverDateTime);
 
     });
 
     //document.getElementById("sendBtn").addEventListener("click", function (e) {
     //    let message = document.getElementById("message").value;
-    //    hubConnection.invoke("Send", message, messageId += 1);
+    //    hubConnection.invoke("Send", message, messageOrder += 1);
     //});
 
     document.getElementById("sendBtn").addEventListener("click", function (e) {
         e.preventDefault();
 
-        let message
         const data = new FormData();
         data.append("connectionId", connectionId);
-        data.append("id", messageId += 1);
+        data.append("id", 0);
         data.append("text", document.getElementById("message").value);
         data.append("serverDateTime", 0);
-        //data.append("order", messageId += 1);
+        data.append("order", messageOrder += 1);
 
         //console.log("Start oneMinBtn");
 

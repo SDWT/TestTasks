@@ -10,15 +10,8 @@ namespace Koshelek.TestTask.DAL.DataBase
 {
     public class PostgreSqlDbContext
     {
-        private const string _cs = "Host=localhost;Username=asp;Password=asp;Database=aspdb;Port=55432";
-        private const string _DbName = "messages";
-        
-        private const string _CreateTableString = "CREATE TABLE IF NOT EXISTS messages(message_id integer PRIMARY KEY, text VARCHAR(128) NOT NULL, datetime TIMESTAMP NOT NULL);";
-
-        private const string AddMessageString = "INSERT INTO messages VALUES(3, 'TextMessage', '2020-06-22 19:12:25')";
-        private const string RowExistString = "SELECT EXISTS(SELECT 1 FROM messages WHERE message_id=3)";
-        private const string GetMessagesByTimeStampString =
-            "SELECT message_id, text, datetime FROM messages WHERE datetime BETWEEN '2020-06-02 23:55:00'::timestamp AND '2020-06-22 19:12:25'::timestamp;";
+        private const string _CreateTableString =
+            "CREATE TABLE IF NOT EXISTS messages(message_id serial PRIMARY KEY, text VARCHAR(128) NOT NULL, datetime TIMESTAMP NOT NULL, message_order integer NOT NULL);";
 
         private readonly string _ConnectionString;
 
@@ -26,7 +19,7 @@ namespace Koshelek.TestTask.DAL.DataBase
         /// Working with PostgreSQL constructor
         /// </summary>
         /// <param name="ConnectionString">Database connection string</param>
-        public PostgreSqlDbContext(string ConnectionString = _cs)
+        public PostgreSqlDbContext(string ConnectionString)
         {
             _ConnectionString = ConnectionString;
 
@@ -46,8 +39,8 @@ namespace Koshelek.TestTask.DAL.DataBase
 
         public void AddMessage(Message message)
         {
-            string InsertMessage = 
-                $"INSERT INTO messages VALUES({message.Id}, '{message.Text}', '{message.ServerDateTime.ToString("yyyy-MM-dd HH:mm:ss")}')";
+            string InsertMessage =
+               $"INSERT INTO messages (text, datetime, message_order) VALUES('{message.Text}', '{message.ServerDateTime.ToString("yyyy-MM-dd HH:mm:ss")}', {message.Order})";
 
             using (NpgsqlConnection connection = new NpgsqlConnection(_ConnectionString))
             {
@@ -58,6 +51,7 @@ namespace Koshelek.TestTask.DAL.DataBase
                     //log Console.WriteLine($"\nINFO: Start reading\n");
 
                     command.CommandText = InsertMessage;
+                    command.ExecuteScalar();
                     
                 }
 
@@ -69,7 +63,7 @@ namespace Koshelek.TestTask.DAL.DataBase
         {
             string RowExist = $"SELECT EXISTS(SELECT 1 FROM messages WHERE message_id={message.Id})";
             string InsertMessage =
-                $"INSERT INTO messages VALUES({message.Id}, '{message.Text}', '{message.ServerDateTime.ToString("yyyy-MM-dd HH:mm:ss")}')";
+               $"INSERT INTO messages (text, datetime, message_order) VALUES('{message.Text}', '{message.ServerDateTime.ToString("yyyy-MM-dd HH:mm:ss")}', {message.Order})";
 
             using (NpgsqlConnection connection = new NpgsqlConnection(_ConnectionString))
             {
@@ -101,12 +95,10 @@ namespace Koshelek.TestTask.DAL.DataBase
             var messages = new List<Message>();
             var strB = new StringBuilder();
 
-            string[] attributes = { "message_id", "text", "datetime" };
-
-            strB.Append("SELECT message_id, text, datetime FROM messages WHERE datetime BETWEEN ");
-            strB.Append($"'{Start.ToString("yyyy-MM-dd HH:mm:ss")}'::timestamp ");
+            strB.Append("SELECT * FROM messages WHERE datetime BETWEEN ");
+            strB.Append($"'{Start:yyyy-MM-dd HH:mm:ss}'::timestamp ");
             strB.Append("AND ");
-            strB.Append($"'{End.ToString("yyyy-MM-dd HH:mm:ss")}'::timestamp;");
+            strB.Append($"'{End:yyyy-MM-dd HH:mm:ss}'::timestamp;");
 
             string GetMessagesBetweenTimeStampCommand = strB.ToString();
 
@@ -127,7 +119,9 @@ namespace Koshelek.TestTask.DAL.DataBase
                         {
                             Id = int.Parse(reader[0].ToString()),
                             Text = reader[1].ToString(),
-                            ServerDateTime = DateTime.Parse(reader[2].ToString())
+                            ServerDateTime = DateTime.Parse(reader[2].ToString()),
+                            Order = int.Parse(reader[3].ToString())
+
                         });
                         //log Console.WriteLine($"");
                     }

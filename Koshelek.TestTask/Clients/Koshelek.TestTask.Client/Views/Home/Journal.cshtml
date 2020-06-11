@@ -50,16 +50,16 @@
                 .catch(error => console.error("Error: ", error));
         });
 
-    function addMessage(message, msgId, msgDateTime) {
-        let msgIdElem = document.createElement("b");
-        msgIdElem.appendChild(document.createTextNode(msgId + ': '));
+    function addMessage(message, msgOrder, msgDateTime) {
+        let msgOrderElem = document.createElement("b");
+        msgOrderElem.appendChild(document.createTextNode(msgOrder + ': '));
 
         let msgDateTimeElem = document.createElement("i");
         msgDateTimeElem.appendChild(document.createTextNode(msgDateTime + " | "));
 
         let elem = document.createElement("p");
         elem.appendChild(msgDateTimeElem);
-        elem.appendChild(msgIdElem);
+        elem.appendChild(msgOrderElem);
         elem.appendChild(document.createTextNode(message));
 
         document.getElementById("Messages").appendChild(elem);
@@ -70,18 +70,10 @@
         document.getElementById("Messages").innerHTML = "";
         for (let i = 0; i < data.length; i++) {
 
-            addMessage(data[i].text, data[i].id, data[i].serverDateTime);
+            addMessage(data[i].text, data[i].order, data[i].serverDateTime);
         }
     });
 
-    hubConnection.on("Notify", function (message) {
-
-        let elem = document.createElement("p");
-        elem.appendChild(document.createTextNode(message));
-
-        document.getElementById("notify").appendChild(elem);
-
-    });
     hubConnection.start().then(() => {
         console.log(hubConnection.connectionId);
         connectionId = hubConnection.connectionId;
