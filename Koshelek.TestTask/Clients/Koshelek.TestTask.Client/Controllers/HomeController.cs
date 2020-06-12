@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Koshelek.TestTask.Client.Models;
@@ -13,6 +9,10 @@ namespace Koshelek.TestTask.Client.Controllers
     {
         private readonly ILogger<HomeController> _logger;
 
+        /// <summary>
+        /// Clients controller
+        /// </summary>
+        /// <param name="logger">logger</param>
         public HomeController(ILogger<HomeController> logger)
         {
             _logger = logger;
@@ -36,16 +36,19 @@ namespace Koshelek.TestTask.Client.Controllers
 
         public IActionResult Sender()
         {
+            _logger.LogInformation("Open Sender browser client");
             return View();
         }
 
         public IActionResult Recipient()
         {
+            _logger.LogInformation("Open Recipient browser client");
             return View();
         }
 
         public IActionResult Journal()
         {
+            _logger.LogInformation("Open Journal browser client");
             return View();
         }
     }

@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 
 namespace Koshelek.TestTask.Client
 {
@@ -29,7 +30,8 @@ namespace Koshelek.TestTask.Client
             services.AddControllersWithViews();
             services.AddSignalR();
 
-            services.AddSingleton<IMessageData>(new PostgreSqlMessageData(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddSingleton<IMessageData>(opt => new PostgreSqlMessageData(Configuration.GetConnectionString("DefaultConnection"),
+                opt.GetService<ILogger<PostgreSqlMessageData>>(), opt.GetService<ILogger<PostgreSqlDbContext>>()));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

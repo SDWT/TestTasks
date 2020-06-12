@@ -1,20 +1,22 @@
 ﻿using Koshelek.TestTask.DAL.DataBase;
 using Koshelek.TestTask.Domain.Entities;
 using Koshelek.TestTask.Interfaces.Interfaces;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
+using System.Diagnostics;
 
 namespace Koshelek.TestTask.Interfaces.Services
 {
     public class PostgreSqlMessageData : IMessageData
     {
         private readonly PostgreSqlDbContext _db;
+        private readonly ILogger<PostgreSqlMessageData> _logger;
 
-        public PostgreSqlMessageData(string ConnectionString)
+        public PostgreSqlMessageData(string ConnectionString, ILogger<PostgreSqlMessageData> logger, ILogger<PostgreSqlDbContext> loggerDb)
         {
-            _db = new PostgreSqlDbContext(ConnectionString);
+            _db = new PostgreSqlDbContext(ConnectionString, loggerDb);
+            _logger = logger;
         }
 
         public List<Message> GetMessagesByDate(DateTime Start, DateTime End)
@@ -24,7 +26,7 @@ namespace Koshelek.TestTask.Interfaces.Services
 
         public void PostMessage(Message message)
         {
-            _db.UpdateMessage(message);
+            _db.AddOrUpdateMessage(message);
         }
     }
 }

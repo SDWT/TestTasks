@@ -7,6 +7,7 @@ using Koshelek.TestTask.Domain.Entities;
 using Koshelek.TestTask.Interfaces.Interfaces;
 using Microsoft.AspNetCore.SignalR;
 using Koshelek.TestTask.Client.Hubs;
+using Microsoft.Extensions.Logging;
 
 namespace Koshelek.TestTask.Client.Controllers
 {
@@ -17,21 +18,24 @@ namespace Koshelek.TestTask.Client.Controllers
         /// <summary>Messages data provider</summary>
         private readonly IMessageData _MessageData;
         private readonly IHubContext<MessagesHub> _HubContext;
+        private readonly ILogger<MessageApiController> _logger;
 
         /// <summary>
         /// Messaage controller constroctor
         /// </summary>
         /// <param name="MessageData">Messages data provider</param>
-        public MessageApiController(IMessageData MessageData, IHubContext<MessagesHub> HubContext)
+        public MessageApiController(IMessageData MessageData, IHubContext<MessagesHub> HubContext, ILogger<MessageApiController> logger)
         {
             _MessageData = MessageData;
             _HubContext = HubContext;
+            _logger = logger;
         }
 
         [HttpPost, ActionName("Post")]
         public async Task Post(string connectionId, Message message)
         {
             message.ServerDateTime = DateTime.Now;
+            _logger.LogDebug($"{message.ServerDateTime}| Receive message {message.Text}, Order: {message.Order}");
 
             await _HubContext.Clients.AllExcept(connectionId).SendAsync("ReceiveMessage", new
             {
