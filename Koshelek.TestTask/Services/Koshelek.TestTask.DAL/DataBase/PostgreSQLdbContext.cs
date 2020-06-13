@@ -48,7 +48,15 @@ namespace Koshelek.TestTask.DAL.DataBase
             using (NpgsqlConnection connection = new NpgsqlConnection(_ConnectionString))
             {
                 _logger.LogDebug($"Try to open db connection session: {session}");
-                connection.Open();
+                try
+                {
+                    connection.Open();
+                }
+                catch (Exception ex)
+                {
+                    _logger.LogCritical(ex.Message);
+                    throw;
+                }
                 using (var command = connection.CreateCommand())
                 {
                     _logger.LogDebug("Try create table");
