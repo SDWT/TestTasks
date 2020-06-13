@@ -2,8 +2,6 @@
 using Npgsql;
 using System;
 using System.Collections.Generic;
-using System.Data.OleDb;
-using System.Data.SqlClient;
 
 
 namespace ConnectionSamples
@@ -13,9 +11,12 @@ namespace ConnectionSamples
         static void Main(string[] args)
         {
             Console.WriteLine("Hello World!");
-            TestConnection();
-            TestConnection2();
-            TestConnection3();
+            //var cs = "Host=localhost;Username=asp;Password=asp;Port=55432;Database=aspdb;Pooling=true;";
+            var cs = "Server=postgres;Username=asp;Password=asp;Database=aspdb;Port=55432";
+
+            TestConnection(cs);
+            //TestConnection2(cs);
+            //TestConnection3(cs);
             //DBHelper.Connection();
             //DropTable();
             //ShowAll();
@@ -23,8 +24,7 @@ namespace ConnectionSamples
 
         public static void ShowAll()
         {
-            //var cs = "Host=localhost;Username=asp;Password=asp;Database=aspdb;Port=55432";
-            var cs = "Username=asp;Password=asp;Server=postgres;Port=55432;Database=aspdb;Integrated Security=true;Pooling=true;";
+            var cs = "Host=localhost;Username=asp;Password=asp;Database=aspdb;Port=55432";
 
             using (NpgsqlConnection connection = new NpgsqlConnection(cs))
             {
@@ -83,9 +83,8 @@ namespace ConnectionSamples
             }
         }
 
-        public static void TestConnection3()
+        public static void TestConnection3(string cs)
         {
-            var cs = "Host=localhost;Username=asp;Password=asp;Database=aspdb;Port=55432";
             string _CreateTable = "CREATE TABLE IF NOT EXISTS messages(message_id serial PRIMARY KEY, text VARCHAR(128) NOT NULL, datetime TIMESTAMP NOT NULL, message_order integer NOT NULL);";
 
             string AddMessage = "INSERT INTO messages (text, datetime, message_order) VALUES('TextMessage', '2020-06-22 19:12:25', 35)";
@@ -178,9 +177,8 @@ namespace ConnectionSamples
             }
         }
 
-        public static void TestConnection2()
+        public static void TestConnection2(string cs)
         {
-            var cs = "Host=localhost;Username=asp;Password=asp;Database=aspdb;Port=55432";
 
             using var con = new NpgsqlConnection(cs);
             con.Open();
@@ -193,9 +191,9 @@ namespace ConnectionSamples
             Console.WriteLine($"PostgreSQL version: {version}");
         }
 
-        public static void TestConnection()
+        public static void TestConnection(string cs)
         {
-            var cs = "Host=localhost;Username=asp;Password=asp;Database=aspdb;Port=55432";
+            Console.WriteLine("Try connect");
             using (NpgsqlConnection connection = new NpgsqlConnection(cs))
             {
                 connection.Open();
