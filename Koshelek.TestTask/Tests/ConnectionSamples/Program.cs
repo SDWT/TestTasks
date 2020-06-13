@@ -24,7 +24,7 @@ namespace ConnectionSamples
         public static void ShowAll()
         {
             //var cs = "Host=localhost;Username=asp;Password=asp;Database=aspdb;Port=55432";
-            var cs = "Username=asp;Password=asp;Server=postgres;Port=55432;Database=aspdb;Integrated Security=true;Pooling=true;";
+            var cs = "Username=asp;Password=asp;Server=postgres;Port=55432;Database=aspdb;Pooling=true;";
 
             using (NpgsqlConnection connection = new NpgsqlConnection(cs))
             {
