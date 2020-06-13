@@ -49,8 +49,8 @@ namespace Koshelek.TestTask.Client
 
             app.UseCors();
 
-            app.UseAuthentication();
-            app.UseAuthorization();
+            //app.UseAuthentication();
+            //app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {

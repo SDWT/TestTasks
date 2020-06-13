@@ -22,12 +22,29 @@ namespace Koshelek.TestTask.DAL.DataBase
         /// <param name="ConnectionString">Database connection string</param>
         public PostgreSqlDbContext(string ConnectionString, ILogger<PostgreSqlDbContext> logger)
         {
-            int session = new Random().Next();
             _ConnectionString = ConnectionString;
             _logger = logger;
 
             #region Create Table If not exists
-            
+
+            CreateTable();
+            #endregion
+
+        }
+
+        private void CreateDataBase()
+        {
+
+        }
+
+        private void CreateUser()
+        {
+
+        }
+
+        private void CreateTable()
+        {
+            int session = new Random().Next();
             using (NpgsqlConnection connection = new NpgsqlConnection(_ConnectionString))
             {
                 _logger.LogDebug($"Try to open db connection session: {session}");
@@ -42,8 +59,6 @@ namespace Koshelek.TestTask.DAL.DataBase
                 connection.Close();
                 _logger.LogDebug($"End db connection session: {session}");
             }
-            #endregion
-            
         }
 
         /// <summary>
