@@ -11,15 +11,40 @@ namespace ConnectionSamples
         static void Main(string[] args)
         {
             Console.WriteLine("Hello World!");
-            //var cs = "Host=localhost;Username=asp;Password=asp;Port=55432;Database=aspdb;Pooling=true;";
+            var cs2 = "Host=localhost;Username=asp;Password=asp;Port=55432;Database=aspdb;Pooling=true;";
             var cs = "Server=postgres;Username=asp;Password=asp;Database=aspdb;Port=55432";
 
-            TestConnection(cs);
+            TryConnectionString(cs);
+            TryConnectionString(cs2);
+
+
+
             //TestConnection2(cs);
             //TestConnection3(cs);
             //DBHelper.Connection();
             //DropTable();
             //ShowAll();
+        }
+
+        private static void TryConnectionString(string connectionString)
+        {
+            Console.WriteLine(connectionString);
+            Console.WriteLine();
+            try
+            {
+                TestConnection(connectionString);
+            }
+            catch (Exception ex)
+            {
+                var e = ex;
+
+                while (!(e is null))
+                {
+                    Console.WriteLine($"cs: {e.Message}");
+                    e = e.InnerException;
+
+                }
+            }
         }
 
         public static void ShowAll()
