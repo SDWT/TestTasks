@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
-namespace AspNetCorePostgreSQLDockerApp.Controllers
+namespace Koshelek.TestTask.Controllers
 {
     public class HomeController : Controller
     {

@@ -6,10 +6,10 @@ using Microsoft.AspNetCore.Mvc;
 using Koshelek.TestTask.Domain.Entities;
 using Koshelek.TestTask.Interfaces.Interfaces;
 using Microsoft.AspNetCore.SignalR;
-using AspNetCorePostgreSQLDockerApp.Hubs;
+using Koshelek.TestTask.Hubs;
 using Microsoft.Extensions.Logging;
 
-namespace AspNetCorePostgreSQLDockerApp.Controllers
+namespace Koshelek.TestTask.Controllers
 {
     public class MessageApiController : Controller
     {

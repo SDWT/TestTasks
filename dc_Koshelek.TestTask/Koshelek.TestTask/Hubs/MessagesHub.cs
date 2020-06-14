@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.SignalR;
 
-namespace AspNetCorePostgreSQLDockerApp.Hubs
+namespace Koshelek.TestTask.Hubs
 {
     public class MessagesHub : Hub
     {

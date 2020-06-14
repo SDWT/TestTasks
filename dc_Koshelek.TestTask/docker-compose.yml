@@ -3,8 +3,8 @@ version: '3.7'
 services:
 
   web:
-    container_name: 'aspnetcoreapp'
-    image: 'aspnetcoreapp'
+    container_name: 'koshelektesttask'
+    image: 'koshelektesttask'
     build:
       context: .
       dockerfile: aspnetcore.dockerfile
@@ -13,7 +13,7 @@ services:
     depends_on:
      - "postgres"
     networks:
-      - aspnetcoreapp-network
+      - koshelektesttask-network
 
   postgres:
     container_name: 'postgres'
@@ -23,8 +23,8 @@ services:
       POSTGRES_PASSWORD: asppassword
       POSTGRES_DB: aspdb
     networks:
-      - aspnetcoreapp-network
+      - koshelektesttask-network
 
 networks:
-  aspnetcoreapp-network:
+  koshelektesttask-network:
     driver: bridge

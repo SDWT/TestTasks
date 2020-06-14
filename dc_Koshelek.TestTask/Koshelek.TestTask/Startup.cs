@@ -1,10 +1,9 @@
-using AspNetCorePostgreSQLDockerApp.Hubs;
+using Koshelek.TestTask.Hubs;
 using Koshelek.TestTask.DAL.DataBase;
 using Koshelek.TestTask.Interfaces.Interfaces;
 using Koshelek.TestTask.Interfaces.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -12,7 +11,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using System;
 
-namespace AspNetCorePostgreSQLDockerApp
+namespace Koshelek.TestTask
 {
     public class Startup
     {

@@ -2,7 +2,7 @@ using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
 
-namespace AspNetCorePostgreSQLDockerApp
+namespace Koshelek.TestTask
 {
     public class Program
     {

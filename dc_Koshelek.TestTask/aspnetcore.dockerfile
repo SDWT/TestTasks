@@ -8,9 +8,9 @@ WORKDIR /var/www/Extra
 
 COPY ./Extra .
 
-WORKDIR /var/www/aspnetcoreapp
+WORKDIR /var/www/koshelektesttask
 
-COPY ./AspNetCorePostgreSQLDockerApp .
+COPY ./Koshelek.TestTask .
 
 EXPOSE 5000
 

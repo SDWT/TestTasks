@@ -15,7 +15,7 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
-    "AspNetCorePostgreSQLDockerApp": {
+    "Koshelek.TestTask": {
       "commandName": "Project",
       "launchBrowser": true,
       "launchUrl": "http://0.0.0.0:5000",
