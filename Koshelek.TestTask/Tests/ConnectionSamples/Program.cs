@@ -11,8 +11,8 @@ namespace ConnectionSamples
         static void Main(string[] args)
         {
             Console.WriteLine("Hello World!");
-            var cs2 = "Host=localhost;Username=asp;Password=asp;Port=55432;Database=aspdb;Pooling=true;";
-            var cs = "Server=postgres;Username=asp;Password=asp;Database=aspdb;Port=55432";
+            var cs2 = "Host=localhost;Username=asp;Password=asp;Port=5432;Database=aspdb;Pooling=true;";
+            var cs = "Server=postgres;Username=asp;Password=asp;Database=aspdb;Port=5432";
 
             TryConnectionString(cs);
             TryConnectionString(cs2);

@@ -1,0 +1,81 @@
+﻿@model Koshelek.TestTask.Domain.Entities.Message
+
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        Отправить
+    </div>
+    <div class="panel-body">
+        <form asp-action="Sender">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Text" class="control-label" type="text"></label>
+                <input asp-for="Text" class="form-control" id="message" />
+                <span asp-validation-for="Text" class="text-danger"></span>
+            </div>
+            <input type="hidden" asp-for="Id" value="null" />
+            <input type="hidden" asp-for="ServerDateTime" value="null" />
+            <div class="form-group">
+                <input type="button" id="sendBtn" value="Send" class="btn btn-success" />
+            </div>
+        </form>
+    </div>
+</div>
+<div id="Messages"></div>
+<script src="/js/signalr/dist/browser/signalr.min.js"></script>
+<script>
+
+    const hubConnection = new signalR.HubConnectionBuilder()
+        .withUrl("/messages")
+        .build();
+
+    let connectionId = "";
+    let messageOrder = 0;
+
+    function addMessage(message, msgOrder, msgDateTime) {
+        let msgOrderElem = document.createElement("b");
+        msgOrderElem.appendChild(document.createTextNode(msgOrder + ': '));
+
+        let msgDateTimeElem = document.createElement("i");
+        msgDateTimeElem.appendChild(document.createTextNode(msgDateTime + " | "));
+
+        let elem = document.createElement("p");
+        elem.appendChild(msgDateTimeElem);
+        elem.appendChild(msgOrderElem);
+        elem.appendChild(document.createTextNode(message));
+
+        document.getElementById("Messages").appendChild(elem);
+    }
+
+    hubConnection.on("ReceiveMessage", function (message) {
+        addMessage(message.text, message.order, message.serverDateTime);
+    });
+
+    //document.getElementById("sendBtn").addEventListener("click", function (e) {
+    //    let message = document.getElementById("message").value;
+    //    hubConnection.invoke("Send", message, messageOrder += 1);
+    //});
+
+    document.getElementById("sendBtn").addEventListener("click", function (e) {
+        e.preventDefault();
+
+        const data = new FormData();
+        data.append("connectionId", connectionId);
+        data.append("id", 0);
+        data.append("text", document.getElementById("message").value);
+        data.append("serverDateTime", 0);
+        data.append("order", messageOrder += 1);
+
+        //console.log("Start oneMinBtn");
+
+        fetch("/MessageApi/Post", {
+            method: "POST",
+            body: data
+        })
+            .catch(error => console.error("Error: ", error));
+    });
+
+    hubConnection.start().then(() => {
+        console.log(hubConnection.connectionId);
+        connectionId = hubConnection.connectionId;
+    });
+</script>

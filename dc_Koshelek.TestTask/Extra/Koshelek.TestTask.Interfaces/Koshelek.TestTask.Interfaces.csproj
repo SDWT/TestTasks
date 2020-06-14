@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Koshelek.TestTask.DAL\Koshelek.TestTask.DAL.csproj" />
+    <ProjectReference Include="..\Koshelek.TestTask.Domain\Koshelek.TestTask.Domain.csproj" />
+  </ItemGroup>
+
+</Project>

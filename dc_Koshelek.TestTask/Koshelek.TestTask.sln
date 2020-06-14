@@ -1,0 +1,53 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30204.135
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AspNetCorePostgreSQLDockerApp", "AspNetCorePostgreSQLDockerApp", "{94FF9455-201B-452A-8262-AFB25D1CF615}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AspNetCorePostgreSQLDockerApp", "AspNetCorePostgreSQLDockerApp\AspNetCorePostgreSQLDockerApp.csproj", "{E32E1866-48E9-47FA-9DEF-3F91BC29C5C8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Extra", "Extra", "{EFC9029C-3E75-4867-919A-828FC0E18CFD}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Koshelek.TestTask.DAL", "Extra\Koshelek.TestTask.DAL\Koshelek.TestTask.DAL.csproj", "{027348E5-5C01-4265-8D8D-F484E736D668}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Koshelek.TestTask.Domain", "Extra\Koshelek.TestTask.Domain\Koshelek.TestTask.Domain.csproj", "{D90850F5-F965-49F7-94D5-10FDEEB59500}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Koshelek.TestTask.Interfaces", "Extra\Koshelek.TestTask.Interfaces\Koshelek.TestTask.Interfaces.csproj", "{70398E66-9AB1-49BD-BC3F-D5A70CB316DC}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E32E1866-48E9-47FA-9DEF-3F91BC29C5C8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E32E1866-48E9-47FA-9DEF-3F91BC29C5C8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E32E1866-48E9-47FA-9DEF-3F91BC29C5C8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E32E1866-48E9-47FA-9DEF-3F91BC29C5C8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{027348E5-5C01-4265-8D8D-F484E736D668}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{027348E5-5C01-4265-8D8D-F484E736D668}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{027348E5-5C01-4265-8D8D-F484E736D668}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{027348E5-5C01-4265-8D8D-F484E736D668}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D90850F5-F965-49F7-94D5-10FDEEB59500}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D90850F5-F965-49F7-94D5-10FDEEB59500}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D90850F5-F965-49F7-94D5-10FDEEB59500}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D90850F5-F965-49F7-94D5-10FDEEB59500}.Release|Any CPU.Build.0 = Release|Any CPU
+		{70398E66-9AB1-49BD-BC3F-D5A70CB316DC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{70398E66-9AB1-49BD-BC3F-D5A70CB316DC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{70398E66-9AB1-49BD-BC3F-D5A70CB316DC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{70398E66-9AB1-49BD-BC3F-D5A70CB316DC}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{E32E1866-48E9-47FA-9DEF-3F91BC29C5C8} = {94FF9455-201B-452A-8262-AFB25D1CF615}
+		{027348E5-5C01-4265-8D8D-F484E736D668} = {EFC9029C-3E75-4867-919A-828FC0E18CFD}
+		{D90850F5-F965-49F7-94D5-10FDEEB59500} = {EFC9029C-3E75-4867-919A-828FC0E18CFD}
+		{70398E66-9AB1-49BD-BC3F-D5A70CB316DC} = {EFC9029C-3E75-4867-919A-828FC0E18CFD}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {6F5D15EF-57FD-4A6D-AD4E-0FECD6F59FDE}
+	EndGlobalSection
+EndGlobal
