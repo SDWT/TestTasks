@@ -36,6 +36,10 @@ namespace Koshelek.TestTask.Controllers
         [HttpPost, ActionName("Post")]
         public async Task Post(string connectionId, Message message)
         {
+            if (message is null)
+            {
+                return;
+            }
             message.ServerDateTime = DateTime.Now;
             _logger.LogDebug($"{message.ServerDateTime}| Receive message {message.Text}, Order: {message.Order}");
 
