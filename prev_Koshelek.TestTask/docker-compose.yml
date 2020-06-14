@@ -1,0 +1,61 @@
+version: '3.7'
+
+
+services:
+
+#  aspwebaplication:
+#    container_name: 'koshelek.testtask.client'
+#    image: 'koshelek.testtask.client'
+#    build:
+#      context: .
+#      dockerfile: client.dockerfile
+#    command: >
+#      sh -c 'dockerize -wait tcp://postgres:55432 -timeout 60s
+#      && aspwebaplication seed
+#      && aspwebaplication run --full-refresh
+#      && aspwebaplication snapshot'
+#    links:
+#      - postgres
+#    restart: always
+#    ports:
+#      - 55444:80
+#    depends_on:
+#      - "postgres"
+#    networks:
+#      - koshelek-testtask-network
+
+  consoletest:
+    container_name: 'consoletest'
+    image: 'consoletest'
+    build:
+      context: .
+      dockerfile: console.dockerfile
+    command: >
+      sh -c 'dockerize -wait tcp://postgres:55432 -timeout 60s'
+    links:
+      - postgres
+    depends_on:
+      - "postgres"
+    networks:
+      - koshelek-testtask-network
+
+
+  postgres:
+    container_name: 'postgres'
+    image: 'postgres'
+    build:
+      context: .
+      dockerfile: postgres.dockerfile
+    restart: always
+    environment:
+      POSTGRES_USER: asp
+      POSTGRES_PASSWORD: asp
+      POSTGRES_DB: aspdb
+    ports:
+      - 55432:5432
+    networks:
+      - koshelek-testtask-network
+
+networks:
+  koshelek-testtask-network:
+    driver: bridge
