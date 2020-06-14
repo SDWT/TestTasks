@@ -15,8 +15,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Koshelek.TestTask.Interface
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{BF4F3FF2-6AED-4B7E-B57C-FE5F0629020C}"
 	ProjectSection(SolutionItems) = preProject
+		.gitignore = .gitignore
 		aspnetcore.dockerfile = aspnetcore.dockerfile
 		docker-compose.yml = docker-compose.yml
+		README.md = README.md
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Koshelek.TestTask", "Koshelek.TestTask\Koshelek.TestTask.csproj", "{401CADF8-6388-4A62-B451-B16194AAEEBA}"

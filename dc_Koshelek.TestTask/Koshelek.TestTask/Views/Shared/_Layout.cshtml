@@ -4,7 +4,7 @@
         <base href="/" />
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>@ViewData["Title"] - Asp.Net Core PostgreSQL Docker/Angular App</title>
+        <title>@ViewData["Title"]</title>
 
         <environment names="Development,Staging,Production">
             <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
@@ -41,8 +41,10 @@
         <div class="container body-content">
             @RenderBody()
             <hr />
-            <footer>
-                <p>&copy; 2020 - Wahlin Consulting</p>
+            <footer class="border-top footer text-muted">
+                <div class="container">
+                    &copy; 2020 - Koshelek.TestTask.Client
+                </div>
             </footer>
         </div>
 
@@ -50,6 +52,6 @@
 
         </environment>
 
-        @RenderSection("scripts", required: false)
+        @RenderSection("Scripts", required: false)
     </body>
 </html>

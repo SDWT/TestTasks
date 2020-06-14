@@ -3,32 +3,36 @@
 
 
 <div id="Messages"></div>
-<script src="/js/signalr/dist/browser/signalr.min.js"></script>
-<script>
-    const hubConnection = new signalR.HubConnectionBuilder()
-        .withUrl("/messages")
-        .build();
 
-    function addMessage(message, msgOrder, msgDateTime) {
-        let msgOrderElem = document.createElement("b");
-        msgOrderElem.appendChild(document.createTextNode(msgOrder + ': '));
+@section Scripts
+{
+    <script src="/js/signalr/dist/browser/signalr.min.js"></script>
+    <script>
+        const hubConnection = new signalR.HubConnectionBuilder()
+            .withUrl("/messages")
+            .build();
 
-        let msgDateTimeElem = document.createElement("i");
-        msgDateTimeElem.appendChild(document.createTextNode(msgDateTime + " | "));
+        function addMessage(message, msgOrder, msgDateTime) {
+            let msgOrderElem = document.createElement("b");
+            msgOrderElem.appendChild(document.createTextNode(msgOrder + ': '));
 
-        let elem = document.createElement("p");
-        elem.appendChild(msgDateTimeElem);
-        elem.appendChild(msgOrderElem);
-        elem.appendChild(document.createTextNode(message));
+            let msgDateTimeElem = document.createElement("i");
+            msgDateTimeElem.appendChild(document.createTextNode(msgDateTime + " | "));
 
-        document.getElementById("Messages").appendChild(elem);
-    }
+            let elem = document.createElement("p");
+            elem.appendChild(msgDateTimeElem);
+            elem.appendChild(msgOrderElem);
+            elem.appendChild(document.createTextNode(message));
 
-    hubConnection.on("ReceiveMessage", function (message) {
-        addMessage(message.text, message.order, message.serverDateTime);
+            document.getElementById("Messages").appendChild(elem);
+        }
 
-    });
+        hubConnection.on("ReceiveMessage", function (message) {
+            addMessage(message.text, message.order, message.serverDateTime);
+
+        });
 
 
-    hubConnection.start();
-</script>
+        hubConnection.start();
+    </script>
+}
