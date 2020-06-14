@@ -20,7 +20,6 @@
         </form>
     </div>
 </div>
-<div id="Messages"></div>
 
 @section Scripts
 {
@@ -49,15 +48,6 @@
             document.getElementById("Messages").appendChild(elem);
         }
 
-        hubConnection.on("ReceiveMessage", function (message) {
-            addMessage(message.text, message.order, message.serverDateTime);
-        });
-
-        //document.getElementById("sendBtn").addEventListener("click", function (e) {
-        //    let message = document.getElementById("message").value;
-        //    hubConnection.invoke("Send", message, messageOrder += 1);
-        //});
-
         document.getElementById("sendBtn").addEventListener("click", function (e) {
             e.preventDefault();
 
@@ -67,8 +57,6 @@
             data.append("text", document.getElementById("message").value);
             data.append("serverDateTime", 0);
             data.append("order", messageOrder += 1);
-
-            //console.log("Start oneMinBtn");
 
             fetch("/MessageApi/Post", {
                 method: "POST",
