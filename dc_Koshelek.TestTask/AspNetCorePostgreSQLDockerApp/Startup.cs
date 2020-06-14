@@ -37,9 +37,7 @@ namespace AspNetCorePostgreSQLDockerApp
             //Add PostgreSQL support
             services.AddEntityFrameworkNpgsql()
                 .AddDbContext<DockerCommandsDbContext>(options =>
-                    options.UseNpgsql(Configuration["Data:DbContext:DockerCommandsConnectionString"]))
-                .AddDbContext<CustomersDbContext>(options =>
-                    options.UseNpgsql(Configuration["Data:DbContext:CustomersConnectionString"]));
+                    options.UseNpgsql(Configuration["Data:DbContext:DockerCommandsConnectionString"]));
             
             services.AddSingleton<IMessageData>(opt => new PostgreSqlMessageData(Configuration["Data:DbContext:DockerCommandsConnectionString"],
                 opt.GetService<ILogger<PostgreSqlMessageData>>(), opt.GetService<ILogger<PostgreSqlDbContext>>()));
@@ -48,11 +46,9 @@ namespace AspNetCorePostgreSQLDockerApp
 
             // Add our PostgreSQL Repositories (scoped to each request)
             services.AddScoped<IDockerCommandsRepository, DockerCommandsRepository>();
-            services.AddScoped<ICustomersRepository, CustomersRepository>();
             
             //Transient: Created each time they're needed
             services.AddTransient<DockerCommandsDbSeeder>();
-            services.AddTransient<CustomersDbSeeder>();
 
             services.AddSwaggerGen(options =>
             {
@@ -89,7 +85,7 @@ namespace AspNetCorePostgreSQLDockerApp
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env,
-                              DockerCommandsDbSeeder dockerCommandsDbSeeder, CustomersDbSeeder customersDbSeeder)
+                              DockerCommandsDbSeeder dockerCommandsDbSeeder)
         {
             if (env.IsDevelopment())
             {
@@ -123,14 +119,11 @@ namespace AspNetCorePostgreSQLDockerApp
 
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller}/{action}/{id?}");
+                    pattern: "{controller=Home}/{action=Index}/{id?}");
 
-                // Handle redirecting client-side routes to Customers/Index route
-                endpoints.MapFallbackToController("Index", "Customers");
                 endpoints.MapHub<MessagesHub>("/messages");
             });
 
-            customersDbSeeder.SeedAsync(app.ApplicationServices).Wait();
             dockerCommandsDbSeeder.SeedAsync(app.ApplicationServices).Wait();
 
         }
