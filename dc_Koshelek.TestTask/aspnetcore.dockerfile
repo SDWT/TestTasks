@@ -4,13 +4,17 @@ LABEL author="Dan Wahlin"
 
 ENV ASPNETCORE_URLS=http://+:5000
 
-WORKDIR /var/www/Extra
+WORKDIR /var/Services
 
-COPY ./Extra .
+COPY ./Services .
+
+WORKDIR /var/Common
+
+COPY ./Common .
 
 WORKDIR /var/www/koshelektesttask
 
-COPY ./Koshelek.TestTask .
+COPY ./WebApp/Koshelek.TestTask .
 
 EXPOSE 5000
 

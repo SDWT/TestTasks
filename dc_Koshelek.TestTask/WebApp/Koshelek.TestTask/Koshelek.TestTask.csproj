@@ -11,9 +11,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Extra\Koshelek.TestTask.DAL\Koshelek.TestTask.DAL.csproj" />
-    <ProjectReference Include="..\Extra\Koshelek.TestTask.Domain\Koshelek.TestTask.Domain.csproj" />
-    <ProjectReference Include="..\Extra\Koshelek.TestTask.Interfaces\Koshelek.TestTask.Interfaces.csproj" />
+    <ProjectReference Include="..\..\Common\Koshelek.TestTask.Domain\Koshelek.TestTask.Domain.csproj" />
+    <ProjectReference Include="..\..\Services\Koshelek.TestTask.DAL\Koshelek.TestTask.DAL.csproj" />
+    <ProjectReference Include="..\..\Services\Koshelek.TestTask.Interfaces\Koshelek.TestTask.Interfaces.csproj" />
   </ItemGroup>
 
 </Project>
