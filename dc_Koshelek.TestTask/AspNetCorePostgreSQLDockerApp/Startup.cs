@@ -1,22 +1,16 @@
-using System;
-using System.IO;
+using AspNetCorePostgreSQLDockerApp.Hubs;
+using Koshelek.TestTask.DAL.DataBase;
+using Koshelek.TestTask.Interfaces.Interfaces;
+using Koshelek.TestTask.Interfaces.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.FileProviders;
-using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.OpenApi.Models;
-using AspNetCorePostgreSQLDockerApp.Repository;
-
-using AspNetCorePostgreSQLDockerApp.Hubs;
-using Koshelek.TestTask.DAL.DataBase;
-using Koshelek.TestTask.Interfaces.Interfaces;
-using Koshelek.TestTask.Interfaces.Services;
+using System;
 
 namespace AspNetCorePostgreSQLDockerApp
 {
@@ -35,20 +29,11 @@ namespace AspNetCorePostgreSQLDockerApp
             services.AddSignalR();
 
             //Add PostgreSQL support
-            services.AddEntityFrameworkNpgsql()
-                .AddDbContext<DockerCommandsDbContext>(options =>
-                    options.UseNpgsql(Configuration["Data:DbContext:DockerCommandsConnectionString"]));
             
-            services.AddSingleton<IMessageData>(opt => new PostgreSqlMessageData(Configuration["Data:DbContext:DockerCommandsConnectionString"],
+            services.AddSingleton<IMessageData>(opt => new PostgreSqlMessageData(Configuration["Data:DbContext:MessagesConnectionString"],
                 opt.GetService<ILogger<PostgreSqlMessageData>>(), opt.GetService<ILogger<PostgreSqlDbContext>>()));
 
             services.AddControllersWithViews();
-
-            // Add our PostgreSQL Repositories (scoped to each request)
-            services.AddScoped<IDockerCommandsRepository, DockerCommandsRepository>();
-            
-            //Transient: Created each time they're needed
-            services.AddTransient<DockerCommandsDbSeeder>();
 
             services.AddSwaggerGen(options =>
             {
@@ -84,8 +69,7 @@ namespace AspNetCorePostgreSQLDockerApp
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env,
-                              DockerCommandsDbSeeder dockerCommandsDbSeeder)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
             {
@@ -123,8 +107,6 @@ namespace AspNetCorePostgreSQLDockerApp
 
                 endpoints.MapHub<MessagesHub>("/messages");
             });
-
-            dockerCommandsDbSeeder.SeedAsync(app.ApplicationServices).Wait();
 
         }
 

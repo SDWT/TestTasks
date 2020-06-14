@@ -19,8 +19,9 @@ services:
     container_name: 'postgres'
     image: postgres
     environment:
-      # change this for a "real" app!
-      POSTGRES_PASSWORD: password
+      POSTGRES_USER: asp
+      POSTGRES_PASSWORD: asppassword
+      POSTGRES_DB: aspdb
     networks:
       - aspnetcoreapp-network
 

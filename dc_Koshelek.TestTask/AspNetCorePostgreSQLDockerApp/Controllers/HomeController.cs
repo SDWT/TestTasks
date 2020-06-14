@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-
-using AspNetCorePostgreSQLDockerApp.Repository;
 using Microsoft.Extensions.Logging;
 
 namespace AspNetCorePostgreSQLDockerApp.Controllers
@@ -12,19 +10,15 @@ namespace AspNetCorePostgreSQLDockerApp.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        IDockerCommandsRepository _repo;
 
-        public HomeController(IDockerCommandsRepository repo, ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger)
         {
-            _repo = repo;
             _logger = logger;
         }
 
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
-            //Call into PostgreSQL
-            var commands = await _repo.GetDockerCommandsAsync();
-            return View(commands);
+            return RedirectToAction("Sender");
         }
 
         public IActionResult About()
