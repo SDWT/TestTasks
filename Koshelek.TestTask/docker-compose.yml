@@ -1,38 +1,30 @@
 version: '3.7'
 
-
 services:
 
-  aspwebaplication:
-    container_name: 'koshelek.testtask.client'
-    image: 'koshelek.testtask.client'
+  web:
+    container_name: 'koshelektesttask'
+    image: 'koshelektesttask'
     build:
       context: .
-      dockerfile: client.dockerfile
-    restart: always
+      dockerfile: aspnetcore.dockerfile
     ports:
-      - 55444:80
+     - "5000:5000"
     depends_on:
      - "postgres"
     networks:
-      - koshelek-testtask-network
-  
+      - koshelektesttask-network
+
   postgres:
     container_name: 'postgres'
-    image: 'postgres'
-    build:
-      context: .
-      dockerfile: postgres.dockerfile
-    restart: always
+    image: postgres
     environment:
       POSTGRES_USER: asp
-      POSTGRES_PASSWORD: asp
+      POSTGRES_PASSWORD: asppassword
       POSTGRES_DB: aspdb
-    ports:
-      - 55432:5432
     networks:
-      - koshelek-testtask-network
+      - koshelektesttask-network
 
 networks:
-  koshelek-testtask-network:
+  koshelektesttask-network:
     driver: bridge

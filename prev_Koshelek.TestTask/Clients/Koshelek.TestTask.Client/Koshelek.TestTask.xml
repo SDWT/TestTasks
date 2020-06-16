@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Koshelek.TestTask.Client</name>
+    </assembly>
+    <members>
+        <member name="M:Koshelek.TestTask.Client.Controllers.HomeController.#ctor(Microsoft.Extensions.Logging.ILogger{Koshelek.TestTask.Client.Controllers.HomeController})">
+            <summary>
+            Clients controller
+            </summary>
+            <param name="logger">logger</param>
+        </member>
+        <member name="F:Koshelek.TestTask.Client.Controllers.MessageApiController._MessageData">
+            <summary>Messages data provider</summary>
+        </member>
+        <member name="M:Koshelek.TestTask.Client.Controllers.MessageApiController.#ctor(Koshelek.TestTask.Interfaces.Interfaces.IMessageData,Microsoft.AspNetCore.SignalR.IHubContext{Koshelek.TestTask.Client.Hubs.MessagesHub},Microsoft.Extensions.Logging.ILogger{Koshelek.TestTask.Client.Controllers.MessageApiController})">
+            <summary>
+            Messaage controller constroctor
+            </summary>
+            <param name="MessageData">Messages data provider</param>
+        </member>
+    </members>
+</doc>
