@@ -11,9 +11,9 @@ using Microsoft.Extensions.Logging;
 
 namespace Koshelek.TestTask.Client.Controllers
 {
-    //[Route("api/[controller]")]
-    //[ApiController]
-    public class MessageApiController : Controller, IMessageData
+    [Route("api/[controller]")]
+    [ApiController]
+    public class MessageApiController : Controller/*, IMessageData*/
     {
         /// <summary>Messages data provider</summary>
         private readonly IMessageData _MessageData;
@@ -32,7 +32,7 @@ namespace Koshelek.TestTask.Client.Controllers
         }
 
         [HttpPost, ActionName("Post")]
-        public async Task Post(string connectionId, Message message)
+        public async Task apc(string connectionId, Message message)
         {
             message.ServerDateTime = DateTime.Now;
             _logger.LogDebug($"{message.ServerDateTime}| Receive message {message.Text}, Order: {message.Order}");
@@ -48,18 +48,19 @@ namespace Koshelek.TestTask.Client.Controllers
             _MessageData.PostMessage(message);
         }
 
-        public void PostMessage(Message message)
-        {
-            _MessageData.PostMessage(message);
-        }
+        //[NonAction]
+        //public void PostMessage(Message message)
+        //{
+        //    _MessageData.PostMessage(message);
+        //}
 
-        [HttpPost]
+        [HttpPost, ActionName("Post1")]
         public async Task GetLast1MinMessages(string connectionId)
         {
             DateTime Start, End = DateTime.Now;
             Start = End - TimeSpan.FromSeconds(60);
 
-            var messages = GetMessagesByDate(Start, End);
+            var messages = _MessageData.GetMessagesByDate(Start, End);
 
             var messages2 = messages.Select(el => new
             {
@@ -71,12 +72,13 @@ namespace Koshelek.TestTask.Client.Controllers
             await _HubContext.Clients.Client(connectionId).SendAsync("Receive", messages2);
         }
 
+        [HttpPost, ActionName("Post10")]
         public async Task GetLast10MinMessages(string connectionId)
         {
             DateTime Start, End = DateTime.Now;
             Start = End - TimeSpan.FromSeconds(600);
 
-            var messages = GetMessagesByDate(Start, End);
+            var messages = _MessageData.GetMessagesByDate(Start, End);
 
             var messages2 = messages.Select(el => new
             {
@@ -88,9 +90,10 @@ namespace Koshelek.TestTask.Client.Controllers
             await _HubContext.Clients.Client(connectionId).SendAsync("Receive", messages2);
         }
 
-        public List<Message> GetMessagesByDate(DateTime Start, DateTime End = default(DateTime))
-        {
-            return _MessageData.GetMessagesByDate(Start, End);
-        }
+        //[NonAction]
+        //public List<Message> GetMessagesByDate(DateTime Start, DateTime End = default(DateTime))
+        //{
+        //    return _MessageData.GetMessagesByDate(Start, End);
+        //}
     }
 }

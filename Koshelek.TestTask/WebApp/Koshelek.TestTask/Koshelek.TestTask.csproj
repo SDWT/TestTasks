@@ -4,6 +4,10 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile>Koshelek.TestTask.xml</DocumentationFile>
+  </PropertyGroup>
+
   <ItemGroup>
     <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="3.1.4" />
     <PackageReference Include="Microsoft.AspNetCore.SpaServices.Extensions" Version="3.1.5" />
@@ -14,6 +18,12 @@
     <ProjectReference Include="..\..\Common\Koshelek.TestTask.Domain\Koshelek.TestTask.Domain.csproj" />
     <ProjectReference Include="..\..\Services\Koshelek.TestTask.DAL\Koshelek.TestTask.DAL.csproj" />
     <ProjectReference Include="..\..\Services\Koshelek.TestTask.Interfaces\Koshelek.TestTask.Interfaces.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Koshelek.TestTask.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>

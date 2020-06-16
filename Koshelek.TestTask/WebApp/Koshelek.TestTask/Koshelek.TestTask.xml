@@ -1,0 +1,49 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Koshelek.TestTask</name>
+    </assembly>
+    <members>
+        <member name="T:Koshelek.TestTask.Controllers.MessageApiController">
+            <summary>
+            Message api controller
+            </summary>
+        </member>
+        <member name="F:Koshelek.TestTask.Controllers.MessageApiController._MessageData">
+            <summary>Messages data provider</summary>
+        </member>
+        <member name="M:Koshelek.TestTask.Controllers.MessageApiController.#ctor(Koshelek.TestTask.Interfaces.Interfaces.IMessageData,Microsoft.AspNetCore.SignalR.IHubContext{Koshelek.TestTask.Hubs.MessagesHub},Microsoft.Extensions.Logging.ILogger{Koshelek.TestTask.Controllers.MessageApiController})">
+            <summary>Messaage controller constroctor</summary>
+            <param name="MessageData">Messages data provider</param>
+        </member>
+        <member name="M:Koshelek.TestTask.Controllers.MessageApiController.Post(System.String,Koshelek.TestTask.Domain.Entities.Message)">
+            <summary>Post message to recipient (second) clients and database</summary>
+            <param name="connectionId">Client connection id</param>
+            <param name="message">Client message</param>
+        </member>
+        <member name="M:Koshelek.TestTask.Controllers.MessageApiController.PostMessage(Koshelek.TestTask.Domain.Entities.Message)">
+            <summary>
+            Send message to database
+            </summary>
+            <param name="message">Message</param>
+        </member>
+        <member name="M:Koshelek.TestTask.Controllers.MessageApiController.GetLast1MinMessages(System.String)">
+            <summary>Get messages from database for last 1 minute</summary>
+            <param name="connectionId">Client connection id</param>
+        </member>
+        <member name="M:Koshelek.TestTask.Controllers.MessageApiController.GetLast10MinMessages(System.String)">
+            <summary>Get messages from database for last 10 minute</summary>
+            <param name="connectionId">Client connection id</param>
+        </member>
+        <member name="M:Koshelek.TestTask.Controllers.MessageApiController.GetMessagesByDate(System.DateTime,System.DateTime)">
+            <summary></summary>
+            <param name="connectionId">Client connection id</param>
+            <summary>
+            Get messages from database in period
+            </summary>
+            <param name="Start">Begin of period</param>
+            <param name="End">End of peri</param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

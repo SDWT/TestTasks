@@ -11,14 +11,14 @@ namespace Koshelek.TestTask.API.Controllers
     [ApiController]
     public class MessageController : Controller
     {
-        [HttpPost, ActionName("Post")]
-        public Message PostMessage(int Id, string Text)
+        [HttpPost]
+        public Message Post(int Id, string Text)
         {
             return new Message { Text = "WIP", Id = -1, ServerDateTime = DateTime.Now};
         }
 
-        [HttpPost, ActionName("Post")]
-        public List<Message> GetMessagesByDate(DateTime Start, DateTime End = default(DateTime))
+        [HttpPost("GetByDate")]
+        public List<Message> GetByDate(DateTime Start, DateTime End = default(DateTime))
         {
             var messages = new List<Message>();
             if (End == default(DateTime))
