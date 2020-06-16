@@ -12,12 +12,11 @@
             <param name="MessageData">Messages data provider</param>
             <param name="logger">logger</param>
         </member>
-        <member name="M:Koshelek.TestTask.Api.Controllers.MessageApiController.GetMessagesByDate(System.DateTime,System.DateTime)">
+        <member name="M:Koshelek.TestTask.Api.Controllers.MessageApiController.GetMessagesByDate(Koshelek.TestTask.Domain.Model.TimePeriod)">
             <summary>
             Get messages from database in period
             </summary>
-            <param name="Start">Begin of period</param>
-            <param name="End">End of peri</param>
+            <param name="TimePeriod">Period of time</param>
             <returns>List of messages with in period</returns>
         </member>
         <member name="M:Koshelek.TestTask.Api.Controllers.MessageApiController.PostMessage(Koshelek.TestTask.Domain.Entities.Message)">

@@ -13,6 +13,7 @@ using Microsoft.OpenApi.Models;
 using System;
 using System.Reflection;
 using System.IO;
+using Koshelek.TestTask.Clients.Message;
 
 namespace Koshelek.TestTask
 {
@@ -31,9 +32,11 @@ namespace Koshelek.TestTask
             services.AddSignalR();
 
             //Add PostgreSQL support
-            
-            services.AddSingleton<IMessageData>(opt => new PostgreSqlMessageData(Configuration["Data:DbContext:MessagesConnectionString"],
-                opt.GetService<ILogger<PostgreSqlMessageData>>(), opt.GetService<ILogger<PostgreSqlDbContext>>()));
+
+            //services.AddSingleton<IMessageData>(opt => new PostgreSqlMessageData(Configuration["Data:DbContext:MessagesConnectionString"],
+            //opt.GetService<ILogger<PostgreSqlMessageData>>(), opt.GetService<ILogger<PostgreSqlDbContext>>()));
+
+            services.AddTransient<IMessageData, MessageClient>();
 
             services.AddControllersWithViews();
 

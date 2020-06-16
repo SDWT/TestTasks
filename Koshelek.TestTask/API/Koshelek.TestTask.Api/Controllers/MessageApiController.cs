@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Koshelek.TestTask.Domain.Entities;
+using Koshelek.TestTask.Domain.Model;
 using Koshelek.TestTask.Interfaces.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -11,7 +12,7 @@ using Microsoft.Extensions.Logging;
 namespace Koshelek.TestTask.Api.Controllers
 {
     /// <summary>Message api controller</summary>
-    [Route("api/[controller]")]
+    [Route("api/Message")]
     [ApiController]
     public class MessageApiController : ControllerBase, IMessageData
     {
@@ -32,14 +33,15 @@ namespace Koshelek.TestTask.Api.Controllers
         /// <summary>
         /// Get messages from database in period
         /// </summary>
-        /// <param name="Start">Begin of period</param>
-        /// <param name="End">End of peri</param>
+        /// <param name="TimePeriod">Period of time</param>
         /// <returns>List of messages with in period</returns>
         [HttpPost("GetByPeriod")]
-        public List<Message> GetMessagesByDate(DateTime Start, DateTime End)
+        public List<Message> GetMessagesByDate(TimePeriod TimePeriod)
         {
-            _logger.LogInformation("Get messages by period");
-            return _MessageData.GetMessagesByDate(Start, End);
+            _logger.LogDebug($"Get messages by period: {TimePeriod.Start} || {TimePeriod.End}");
+            var msgs = _MessageData.GetMessagesByDate(TimePeriod);
+            _logger.LogDebug($"Count of messages by period {TimePeriod.Start} || {TimePeriod.End} is {msgs.Count}");
+            return msgs;
         }
 
         /// <summary> Send message to database </summary>
@@ -47,8 +49,9 @@ namespace Koshelek.TestTask.Api.Controllers
         [HttpPost]
         public void PostMessage(Message message)
         {
-            _logger.LogInformation("Save message");
+            _logger.LogDebug($"Save message {message.Text}");
             _MessageData.PostMessage(message);
+            _logger.LogDebug($"Message saved");
         }
     }
 }

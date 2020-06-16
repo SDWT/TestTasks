@@ -9,7 +9,7 @@ services:
       context: .
       dockerfile: api.dockerfile
     ports:
-     - "5001:80"
+     - "0.0.0.0:5001:80"
     depends_on:
      - "postgres"
     networks:
@@ -22,7 +22,7 @@ services:
       context: .
       dockerfile: aspnetcore.dockerfile
     ports:
-     - "5000:5000"
+     - "0.0.0.0:5000:5000"
     depends_on:
      - "postgres"
     networks:

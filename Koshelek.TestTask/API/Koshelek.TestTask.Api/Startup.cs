@@ -31,7 +31,7 @@ namespace Koshelek.TestTask.Api
             //Add PostgreSQL support
 
             services.AddTransient<IMessageData>(opt => new PostgreSqlMessageData(Configuration["Data:DbContext:MessagesConnectionString"],
-                opt.GetService<ILogger<PostgreSqlMessageData>>(), opt.GetService<ILogger<PostgreSqlDbContext>>()));
+                opt.GetService<ILogger<PostgreSqlDbContext>>()));
 
             services.AddControllers();
 

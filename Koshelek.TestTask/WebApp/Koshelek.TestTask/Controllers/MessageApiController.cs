@@ -8,6 +8,7 @@ using Koshelek.TestTask.Interfaces.Interfaces;
 using Microsoft.AspNetCore.SignalR;
 using Koshelek.TestTask.Hubs;
 using Microsoft.Extensions.Logging;
+using Koshelek.TestTask.Domain.Model;
 
 namespace Koshelek.TestTask.Controllers
 {
@@ -76,7 +77,7 @@ namespace Koshelek.TestTask.Controllers
             Start = End - TimeSpan.FromSeconds(60);
 
             var messages = GetMessagesByDate(Start, End);
-
+            _logger.LogDebug($"Count of messages is {messages.Count}");
             var messages2 = messages.Select(el => new
             {
                 el.Text,
@@ -114,7 +115,7 @@ namespace Koshelek.TestTask.Controllers
         /// <returns>List of messages with in period</returns>
         public List<Message> GetMessagesByDate(DateTime Start, DateTime End = default)
         {
-            return _MessageData.GetMessagesByDate(Start, End);
+            return _MessageData.GetMessagesByDate(new TimePeriod { Start = Start, End = End });
         }
     }
 }

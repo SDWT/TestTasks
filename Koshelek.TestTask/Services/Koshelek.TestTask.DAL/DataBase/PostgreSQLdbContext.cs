@@ -32,16 +32,6 @@ namespace Koshelek.TestTask.DAL.DataBase
 
         }
 
-        private void CreateDataBase()
-        {
-
-        }
-
-        private void CreateUser()
-        {
-
-        }
-
         private void CreateTable()
         {
             int session = new Random().Next();
@@ -77,7 +67,7 @@ namespace Koshelek.TestTask.DAL.DataBase
         {
             int session = new Random().Next();
             string InsertMessage =
-               $"INSERT INTO messages (text, datetime, message_order) VALUES('{message.Text}', '{message.ServerDateTime.ToString("yyyy-MM-dd HH:mm:ss")}', {message.Order})";
+               $"INSERT INTO messages (text, datetime, message_order) VALUES('{message.Text}', '{message.ServerDateTime:yyyy-MM-dd HH:mm:ss}', {message.Order})";
 
             using (NpgsqlConnection connection = new NpgsqlConnection(_ConnectionString))
             {
@@ -106,7 +96,7 @@ namespace Koshelek.TestTask.DAL.DataBase
             int session = new Random().Next();
             string RowExist = $"SELECT EXISTS(SELECT 1 FROM messages WHERE message_id={message.Id})";
             string InsertMessage =
-               $"INSERT INTO messages (text, datetime, message_order) VALUES('{message.Text}', '{message.ServerDateTime.ToString("yyyy-MM-dd HH:mm:ss")}', {message.Order})";
+               $"INSERT INTO messages (text, datetime, message_order) VALUES('{message.Text}', '{message.ServerDateTime:yyyy-MM-dd HH:mm:ss}', {message.Order})";
 
             using (NpgsqlConnection connection = new NpgsqlConnection(_ConnectionString))
             {
