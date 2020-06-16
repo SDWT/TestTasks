@@ -23,6 +23,8 @@ namespace Koshelek.TestTask.Controllers
 
         /// <summary>Messaage controller constroctor</summary>
         /// <param name="MessageData">Messages data provider</param>
+        /// <param name="HubContext">SignalR hub send messages to clients</param>
+        /// <param name="logger">logger</param>
         public MessageApiController(IMessageData MessageData, IHubContext<MessagesHub> HubContext, ILogger<MessageApiController> logger)
         {
             _MessageData = MessageData;
@@ -103,15 +105,14 @@ namespace Koshelek.TestTask.Controllers
             }).ToArray();
             await _HubContext.Clients.Client(connectionId).SendAsync("Receive", messages2);
         }
-        /// <summary></summary>
-        /// <param name="connectionId">Client connection id</param>
+
         /// <summary>
         /// Get messages from database in period
         /// </summary>
         /// <param name="Start">Begin of period</param>
         /// <param name="End">End of peri</param>
-        /// <returns></returns>
-        public List<Message> GetMessagesByDate(DateTime Start, DateTime End = default(DateTime))
+        /// <returns>List of messages with in period</returns>
+        public List<Message> GetMessagesByDate(DateTime Start, DateTime End = default)
         {
             return _MessageData.GetMessagesByDate(Start, End);
         }

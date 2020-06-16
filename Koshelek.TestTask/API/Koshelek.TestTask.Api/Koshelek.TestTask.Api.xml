@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Koshelek.TestTask.Api</name>
+    </assembly>
+    <members>
+        <member name="T:Koshelek.TestTask.Api.Controllers.MessageApiController">
+            <summary>Message api controller</summary>
+        </member>
+        <member name="M:Koshelek.TestTask.Api.Controllers.MessageApiController.#ctor(Koshelek.TestTask.Interfaces.Interfaces.IMessageData,Microsoft.Extensions.Logging.ILogger{Koshelek.TestTask.Api.Controllers.MessageApiController})">
+            <summary>Messaage controller constroctor</summary>
+            <param name="MessageData">Messages data provider</param>
+            <param name="logger">logger</param>
+        </member>
+        <member name="M:Koshelek.TestTask.Api.Controllers.MessageApiController.GetMessagesByDate(System.DateTime,System.DateTime)">
+            <summary>
+            Get messages from database in period
+            </summary>
+            <param name="Start">Begin of period</param>
+            <param name="End">End of peri</param>
+            <returns>List of messages with in period</returns>
+        </member>
+        <member name="M:Koshelek.TestTask.Api.Controllers.MessageApiController.PostMessage(Koshelek.TestTask.Domain.Entities.Message)">
+            <summary> Send message to database </summary>
+            <param name="message">Message</param>
+        </member>
+    </members>
+</doc>
