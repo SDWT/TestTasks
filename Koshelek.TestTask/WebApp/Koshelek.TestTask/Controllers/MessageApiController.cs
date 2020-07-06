@@ -8,6 +8,7 @@ using Koshelek.TestTask.Interfaces.Interfaces;
 using Microsoft.AspNetCore.SignalR;
 using Koshelek.TestTask.Hubs;
 using Microsoft.Extensions.Logging;
+using Koshelek.TestTask.Domain.Model;
 
 namespace Koshelek.TestTask.Controllers
 {
@@ -23,6 +24,8 @@ namespace Koshelek.TestTask.Controllers
 
         /// <summary>Messaage controller constroctor</summary>
         /// <param name="MessageData">Messages data provider</param>
+        /// <param name="HubContext">SignalR hub send messages to clients</param>
+        /// <param name="logger">logger</param>
         public MessageApiController(IMessageData MessageData, IHubContext<MessagesHub> HubContext, ILogger<MessageApiController> logger)
         {
             _MessageData = MessageData;
@@ -74,7 +77,7 @@ namespace Koshelek.TestTask.Controllers
             Start = End - TimeSpan.FromSeconds(60);
 
             var messages = GetMessagesByDate(Start, End);
-
+            _logger.LogDebug($"Count of messages is {messages.Count}");
             var messages2 = messages.Select(el => new
             {
                 el.Text,
@@ -103,17 +106,16 @@ namespace Koshelek.TestTask.Controllers
             }).ToArray();
             await _HubContext.Clients.Client(connectionId).SendAsync("Receive", messages2);
         }
-        /// <summary></summary>
-        /// <param name="connectionId">Client connection id</param>
+
         /// <summary>
         /// Get messages from database in period
         /// </summary>
         /// <param name="Start">Begin of period</param>
         /// <param name="End">End of peri</param>
-        /// <returns></returns>
-        public List<Message> GetMessagesByDate(DateTime Start, DateTime End = default(DateTime))
+        /// <returns>List of messages with in period</returns>
+        public List<Message> GetMessagesByDate(DateTime Start, DateTime End = default)
         {
-            return _MessageData.GetMessagesByDate(Start, End);
+            return _MessageData.GetMessagesByDate(new TimePeriod { Start = Start, End = End });
         }
     }
 }

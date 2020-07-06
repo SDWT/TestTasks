@@ -2,6 +2,19 @@ version: '3.7'
 
 services:
 
+  api:
+    container_name: 'koshelektesttask_api'
+    image: 'koshelektesttask_api'
+    build:
+      context: .
+      dockerfile: api.dockerfile
+    ports:
+     - "0.0.0.0:5001:80"
+    depends_on:
+     - "postgres"
+    networks:
+      - koshelektesttask-network
+
   web:
     container_name: 'koshelektesttask'
     image: 'koshelektesttask'
@@ -9,7 +22,7 @@ services:
       context: .
       dockerfile: aspnetcore.dockerfile
     ports:
-     - "5000:5000"
+     - "0.0.0.0:5000:5000"
     depends_on:
      - "postgres"
     networks:

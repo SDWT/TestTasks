@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
 
-namespace Koshelek.TestTask
+namespace Koshelek.TestTask.Api
 {
     public class Program
     {

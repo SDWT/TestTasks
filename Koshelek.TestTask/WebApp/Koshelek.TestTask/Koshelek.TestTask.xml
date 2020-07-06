@@ -15,6 +15,8 @@
         <member name="M:Koshelek.TestTask.Controllers.MessageApiController.#ctor(Koshelek.TestTask.Interfaces.Interfaces.IMessageData,Microsoft.AspNetCore.SignalR.IHubContext{Koshelek.TestTask.Hubs.MessagesHub},Microsoft.Extensions.Logging.ILogger{Koshelek.TestTask.Controllers.MessageApiController})">
             <summary>Messaage controller constroctor</summary>
             <param name="MessageData">Messages data provider</param>
+            <param name="HubContext">SignalR hub send messages to clients</param>
+            <param name="logger">logger</param>
         </member>
         <member name="M:Koshelek.TestTask.Controllers.MessageApiController.Post(System.String,Koshelek.TestTask.Domain.Entities.Message)">
             <summary>Post message to recipient (second) clients and database</summary>
@@ -36,14 +38,12 @@
             <param name="connectionId">Client connection id</param>
         </member>
         <member name="M:Koshelek.TestTask.Controllers.MessageApiController.GetMessagesByDate(System.DateTime,System.DateTime)">
-            <summary></summary>
-            <param name="connectionId">Client connection id</param>
             <summary>
             Get messages from database in period
             </summary>
             <param name="Start">Begin of period</param>
             <param name="End">End of peri</param>
-            <returns></returns>
+            <returns>List of messages with in period</returns>
         </member>
     </members>
 </doc>

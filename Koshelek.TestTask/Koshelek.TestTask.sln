@@ -6,6 +6,7 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{BF4F3FF2-6AED-4B7E-B57C-FE5F0629020C}"
 	ProjectSection(SolutionItems) = preProject
 		.gitignore = .gitignore
+		api.dockerfile = api.dockerfile
 		aspnetcore.dockerfile = aspnetcore.dockerfile
 		docker-compose.yml = docker-compose.yml
 		README.md = README.md
@@ -24,6 +25,12 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Koshelek.TestTask.DAL", "Services\Koshelek.TestTask.DAL\Koshelek.TestTask.DAL.csproj", "{325769B0-DBE1-4473-800E-DC3D98BFA10A}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Koshelek.TestTask.Domain", "Common\Koshelek.TestTask.Domain\Koshelek.TestTask.Domain.csproj", "{84E4A782-F8B3-4374-A96B-18896C7DA82B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "API", "API", "{7218E3FA-BD11-4048-837D-C8107B27E364}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Koshelek.TestTask.Api", "API\Koshelek.TestTask.Api\Koshelek.TestTask.Api.csproj", "{3F293CA3-2792-4106-8893-2E678157D538}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Koshelek.TestTask.Clients", "Services\Koshelek.TestTask.Clients\Koshelek.TestTask.Clients.csproj", "{22D11243-CF20-4821-BF53-95734521C08B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -47,6 +54,14 @@ Global
 		{84E4A782-F8B3-4374-A96B-18896C7DA82B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{84E4A782-F8B3-4374-A96B-18896C7DA82B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{84E4A782-F8B3-4374-A96B-18896C7DA82B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3F293CA3-2792-4106-8893-2E678157D538}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3F293CA3-2792-4106-8893-2E678157D538}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3F293CA3-2792-4106-8893-2E678157D538}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3F293CA3-2792-4106-8893-2E678157D538}.Release|Any CPU.Build.0 = Release|Any CPU
+		{22D11243-CF20-4821-BF53-95734521C08B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{22D11243-CF20-4821-BF53-95734521C08B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{22D11243-CF20-4821-BF53-95734521C08B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{22D11243-CF20-4821-BF53-95734521C08B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -56,6 +71,8 @@ Global
 		{F1E9139D-28F6-48EB-A890-80662BF6936A} = {E2D52A20-5BFC-479B-A503-855E192F3800}
 		{325769B0-DBE1-4473-800E-DC3D98BFA10A} = {E2D52A20-5BFC-479B-A503-855E192F3800}
 		{84E4A782-F8B3-4374-A96B-18896C7DA82B} = {C553C3ED-34F2-4DFF-89BD-2C84C3C4EF1A}
+		{3F293CA3-2792-4106-8893-2E678157D538} = {7218E3FA-BD11-4048-837D-C8107B27E364}
+		{22D11243-CF20-4821-BF53-95734521C08B} = {E2D52A20-5BFC-479B-A503-855E192F3800}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {6F5D15EF-57FD-4A6D-AD4E-0FECD6F59FDE}

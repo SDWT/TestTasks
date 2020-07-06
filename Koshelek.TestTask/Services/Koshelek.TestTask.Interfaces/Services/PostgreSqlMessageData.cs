@@ -1,5 +1,6 @@
 ﻿using Koshelek.TestTask.DAL.DataBase;
 using Koshelek.TestTask.Domain.Entities;
+using Koshelek.TestTask.Domain.Model;
 using Koshelek.TestTask.Interfaces.Interfaces;
 using Microsoft.Extensions.Logging;
 using System;
@@ -11,17 +12,15 @@ namespace Koshelek.TestTask.Interfaces.Services
     public class PostgreSqlMessageData : IMessageData
     {
         private readonly PostgreSqlDbContext _db;
-        private readonly ILogger<PostgreSqlMessageData> _logger;
 
-        public PostgreSqlMessageData(string ConnectionString, ILogger<PostgreSqlMessageData> logger, ILogger<PostgreSqlDbContext> loggerDb)
+        public PostgreSqlMessageData(string ConnectionString, ILogger<PostgreSqlDbContext> loggerDb)
         {
             _db = new PostgreSqlDbContext(ConnectionString, loggerDb);
-            _logger = logger;
         }
 
-        public List<Message> GetMessagesByDate(DateTime Start, DateTime End)
+        public List<Message> GetMessagesByDate(TimePeriod TimePeriod)
         {
-            return _db.GetMessagesByTimeStamp(Start, End);
+            return _db.GetMessagesByTimeStamp(TimePeriod.Start, TimePeriod.End);
         }
 
         public void PostMessage(Message message)
