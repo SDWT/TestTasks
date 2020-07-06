@@ -1,5 +1,5 @@
 # TestTasks
-This is test task for "Developer C# junior".
+This is test task for "Developer C# junior" job.
 
 ## Koshelek.TestTask
 Main solution be changed from [this project](https://github.com/DanWahlin/AspNetCorePostgreSQLDockerApp) after some problems with docker.
@@ -7,10 +7,9 @@ Main solution be changed from [this project](https://github.com/DanWahlin/AspNet
 ## prev_Koshelek.TestTask
 This solution has some problems with docker containers.
 
-This compose file is the solution of test task.
-It's include postgres 
-
 # Using:
+Docker compose file is the solution of test task.
+It's include postgres 
 1) Download `docker-compose.yml` from Koshelek.TestTask directory
 2) Use `docker-compose up`
 3) Pages
